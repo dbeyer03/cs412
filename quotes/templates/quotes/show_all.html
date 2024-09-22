@@ -1,1 +1,25 @@
 {% extends 'quotes/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>The Whole Oshii</h1>
+    <img src= "{% static 'images/oshii1.jpg' %}" alt="Mamoru Oshii" width="120" height="120" class="all">
+    <img src= "{% static 'images/oshii2.jpg' %}" alt="Mamoru Oshii" width="120" height="120" class="all">
+    <img src= "{% static 'images/oshii3.jpg' %}" alt="Mamoru Oshii" width="120" height="120" class="all">
+
+    <ol>
+        <li align="left">{{ quote1 }}</li>
+        <br>
+        <li>{{ quote2 }}</li>
+        <br>
+        <li>{{ quote3 }}</li>
+        <br>
+        <li>{{ quote4 }}</li>
+        <br>
+        <li>{{ quote5 }}</li>
+        <br>
+        <li>{{ quote6 }}</li>
+        <br>
+    </ol>
+
+{% endblock %}

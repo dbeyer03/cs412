@@ -9,6 +9,6 @@ from . import views
 urlpatterns = [
   path(r'', views.get_quote, name="quote"),
   path(r'about', views.show_about, name="about"),
-  path(r'show_all', views.show_about, name="show_all"),
+  path(r'show_all', views.all_items, name="show_all"),
 
 ]

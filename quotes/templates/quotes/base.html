@@ -13,7 +13,7 @@ will inherit.
         <div>
             <nav>
                 <ul>
-                    <a href="{% url 'quote' %}">Quote of the Day</a>
+                    <a href="{% url 'quote' %}">Today's Quote</a>
                     <a href="{% url 'about' %}">About Website</a>
                     <a href="{% url 'show_all' %}">All Quotes</a>
 
@@ -25,8 +25,11 @@ will inherit.
             {% endblock %}
 
             <hr>
-            <p>It's {{ current_time }}, and Mamoru Oshii is looking at you.</p>
+            <p2>It's {{ current_time }}, and Mamoru Oshii is looking at you.</p2>
         </div>
+
+        <br>
+        <p2>Donovan Eyer, dbeyer03@bu.edu</p2>
 
     </body>
 
