@@ -1,0 +1,30 @@
+<!--quotes/templates/quotes/base.html
+This is the page from which quote, about and show_all 
+will inherit.
+-->
+{% load static %}
+<html>
+    <head>
+        <title>Quotes from Mamoru Oshii</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+
+    <body>
+
+        <nav>
+            <ul>
+                <a href="{% url 'quote' %}">Quote of the Day</a>
+
+            </ul>
+        </nav>
+
+        {% block content %}
+        
+        {% endblock %}
+
+        <hr>
+        <p>It's {{ current_time }}, and Mamoru Oshii is looking at you.</p>
+
+    </body>
+
+</html>
