@@ -30,7 +30,6 @@ def get_quote(request):
   }
 
   # a dictionary of Mamoru Oshii photos.
-  template_name = "quotes/quote.html"
 
   list_pics = {
     'img1': 'oshii1.jpg',
@@ -44,6 +43,22 @@ def get_quote(request):
   new_dict = {}
   new_dict['the_quote'] = pick_quote
   new_dict['the_pic'] = pick_pic
+  new_dict['current_time'] = time.ctime()
 
   return render(request,template_name, new_dict)
 
+def show_about(request):
+  '''
+  The view for the about page, which displays 
+  information about legendary anime director Mamoru
+  Oshii.
+  '''
+
+  # this template will present the response
+  template_name = "quotes/about.html"
+
+  about_dict = {
+    'current_time':time.ctime(),
+  }
+
+  return render(request, template_name, about_dict)

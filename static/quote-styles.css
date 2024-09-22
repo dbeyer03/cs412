@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(230, 216, 237);
+    align-items: center;
+    text-align:center;
+    padding-left:250px;
+    padding-right:250px;
+}
+
+p {
+    color: rgb(65, 8, 118);
+    width:500px;
+    padding-left:250px;
+    padding-right:250px;
+}
+
+h1 {
+    color: rgb(125, 9, 60);
+    font-family:'Courier New', Courier, monospace;
+    font-style: bold;
+    font-size:40px;
+}
+
+a {
+    font-style: italic;
+}
+
+div {
+    max-width:500px;
+}

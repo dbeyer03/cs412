@@ -4,13 +4,12 @@
 {% block content %}
     <h1>Quote of the Day</h1>
     <p>{{ the_quote }}</p>
-    <q>{{ the_pic }}</q>
     {% if the_pic == "oshii1.jpg" %}
-        <img src= "{% static 'images/oshii1.jpg' %}" alt="Mamoru Oshii" width="500" height="600">
+        <img src= "{% static 'images/oshii1.jpg' %}" alt="Mamoru Oshii" width="500" height="500">
     {% elif the_pic == "oshii2.jpg" %}
-        <img src= "{% static 'images/oshii2.jpg' %}" alt="Mamoru Oshii" width="500" height="600">
+        <img src= "{% static 'images/oshii2.jpg' %}" alt="Mamoru Oshii" width="500" height="500">
     {% else %}
-        <img src= "{% static 'images/oshii3.jpg' %}" alt="Mamoru Oshii" width="500" height="600">
+        <img src= "{% static 'images/oshii3.jpg' %}" alt="Mamoru Oshii" width="500" height="500">
     {% endif %}
         
 {% endblock %}

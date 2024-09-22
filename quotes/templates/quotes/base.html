@@ -6,24 +6,27 @@ will inherit.
 <html>
     <head>
         <title>Quotes from Mamoru Oshii</title>
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="{% static 'quote-styles.css' %}">
     </head>
 
     <body>
+        <div>
+            <nav>
+                <ul>
+                    <a href="{% url 'quote' %}">Quote of the Day</a>
+                    <a href="{% url 'about' %}">About Website</a>
+                    <a href="{% url 'show_all' %}">All Quotes</a>
 
-        <nav>
-            <ul>
-                <a href="{% url 'quote' %}">Quote of the Day</a>
+                </ul>
+            </nav>
 
-            </ul>
-        </nav>
+            {% block content %}
+            
+            {% endblock %}
 
-        {% block content %}
-        
-        {% endblock %}
-
-        <hr>
-        <p>It's {{ current_time }}, and Mamoru Oshii is looking at you.</p>
+            <hr>
+            <p>It's {{ current_time }}, and Mamoru Oshii is looking at you.</p>
+        </div>
 
     </body>
 
