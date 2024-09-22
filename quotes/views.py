@@ -4,6 +4,8 @@ import time
 import random
 
 # Create your views here.
+def home_page_view(request):
+    return HttpResponse("Homepage")
 
 def pick_item(items):
   pardoned_q = random.choice(list(items.values()))
