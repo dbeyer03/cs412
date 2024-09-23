@@ -12,7 +12,7 @@ def pick_item(items):
 
   return pardoned_q
 
-def get_quote(request):
+def quote(request):
   '''
   The view for the main page, which will display
   one random quote on the HTML template of the same name.
@@ -49,7 +49,7 @@ def get_quote(request):
 
   return render(request,template_name, new_dict)
 
-def show_about(request):
+def about(request):
   '''
   The view for the about page, which displays 
   information about legendary anime director Mamoru
@@ -65,7 +65,7 @@ def show_about(request):
 
   return render(request, template_name, about_dict)
 
-def all_items(request):
+def show_all(request):
   '''
   The view for the page of all photos and quotes.
   '''
