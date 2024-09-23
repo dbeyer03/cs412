@@ -9,17 +9,21 @@ will inherit.
         <link rel="stylesheet" href="{% static 'quote-styles.css' %}">
     </head>
 
+    
     <body>
-        <div>
-            <nav>
-                <ul>
-                    <a href="{% url 'quote' %}">Today's Quote</a>
-                    <a href="{% url 'about' %}">About Website</a>
-                    <a href="{% url 'show_all' %}">All Quotes</a>
+        <h2>Mamoru Oshii</h2>
+        <!--The buttons for the different pages.-->
+        <nav>
+            <ul>
+                <a href="{% url 'quote' %}">Today's Quote</a>
+                <a href="{% url 'about' %}">About Website</a>
+                <a href="{% url 'show_all' %}">All Quotes</a>
 
-                </ul>
-            </nav>
-
+            </ul>
+        </nav>
+        <div class="two">
+            
+            <!--This is where the information for the html pages will go.-->
             {% block content %}
             
             {% endblock %}
@@ -29,7 +33,10 @@ will inherit.
         </div>
 
         <br>
-        <p2>Donovan Eyer, dbeyer03@bu.edu</p2>
+
+        <div class="three">
+            <p2>Donovan Eyer, dbeyer03@bu.edu</p2>
+        </div>
 
     </body>
 
