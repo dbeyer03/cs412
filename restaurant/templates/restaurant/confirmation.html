@@ -1,0 +1,50 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    
+
+    {% if pork == "pork" %}    
+        <p>{{ pork }}</p>
+    {% endif %}
+
+    {% if salad == "salad" %}    
+        <p>{{ salad }}</p>
+    {% endif %}
+
+    {% if taco == "taco" %}    
+        <p>{{ taco }}</p>
+    {% endif %}
+
+    {% if soup == "soup" %}    
+        <p>{{ soup }}</p>
+    {% endif %}
+
+    {% if burger == "burger" %}    
+        <p>{{ burger }}</p>
+    {% endif %}
+
+    {% if giro == "giro" %}    
+        <p>{{ giro }}</p>
+    {% endif %}
+
+    {% if daily_special != "no_special" %}    
+        <p>{{ daily_special }}</p>
+    {% endif %}
+
+    {% if instructions == "" %}
+        <p>No additional instructions.</p>
+    {% else %}
+        Instructions: <p>{{ instructions }}</p>
+    {% endif %}
+
+
+    <p>Total: ${{ price }}</p><br>
+
+    <p>Your order will arrive at {{ time }}.</p>
+
+    
+        
+
+{% endblock %}

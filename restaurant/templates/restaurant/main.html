@@ -1,0 +1,34 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="op">
+    <p2>Welcome to the Tar and Sugar Dinery, an eatery that combines the richest cooked meals with the 
+        sugariest sweets, and sees if we can combine them into a dish that is quadruple the delish! 
+        As fellow cooks, we hope to fulfill your wildest childhood dreams of 
+        putting the sweet in the sweet dinner! 
+        So click that order button, select the most incongrous combination of dishes and tarts imaginable,
+        and experience sensations beyond your wildest dreams! 
+    </p2>
+</div>
+    <div class="home">
+        
+        <img src= "{% static 'images/candyland.avif' %}" alt="My Restaurant" class="myplace">
+        <div class="info" >
+
+            <p1><b>Name:</b> The Tar and Sugar Dinery <br>
+                <b>Location:</b> 675 Commonwealth Avenue <br>
+                <br>
+                <b>Hours of Operation:</b>
+                <ul>
+                    <li>9AM-9PM Monday-Friday</li>
+                    <li>9AM-8PM Saturday</li>
+                    <li>11AM-5PM Sunday</li>
+                </ul>
+            </p1>
+
+
+        </div>
+    </div>
+
+{% endblock %}

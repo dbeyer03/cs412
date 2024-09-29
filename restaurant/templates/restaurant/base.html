@@ -1,0 +1,31 @@
+<!--restaur/templates/restaurant/base.html
+This is the page from which main, confirmation and order
+will inherit.
+-->
+{% load static %}
+
+<html>
+    <head>
+        <title>The Undesirable Restaurant</title>
+        <link rel="stylesheet" href="{% static 'restaurant.css' %}">
+    </head>
+
+    <body>
+        <div>
+        <h1>The Tar and Sugar Dinery</h1>
+        <p4><i>Two wrongs don't make a right, but two rights can make a wrong.</i></p4>
+        
+        </div>
+        <div class="buttons">
+            <a href="{% url 'main' %}">Home Page</a>
+            <a href="{% url 'order' %}">Make Order</a>
+        </div>
+
+        <!--This is where the information for the html pages will go.-->
+        {% block content %}
+            
+        {% endblock %}
+
+    </body>
+
+</html>
