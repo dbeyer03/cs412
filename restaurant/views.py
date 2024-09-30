@@ -58,14 +58,6 @@ def confirmation(request):
       'name': name,
       'phone':phone,
       'email':email,
-#      'taco':taco, 
-#      'salad':salad,
-#      'pork':pork,
-#      'soup':soup,
-#      'burger':burger,
-#      'giro':giro,
-#      'special':special,
-#      'instructions':instructions,
     }
     total_price = 0
 
@@ -78,30 +70,107 @@ def confirmation(request):
     if 'taco' in request.POST:
       context['taco'] = "taco"
       total_price += 8
+
+      if 'tacomato' in request.POST:
+        context['tacomato']= "tomato"
+      else:
+        context['tacomato']= "no-tomato"
+
+      if 'tacocheese' in request.POST:
+        context['tacocheese']= "tacocheese"
+      else:
+        context['tacocheese']= "no-lettuce"
+
+      if 'tacolettuce' in request.POST:
+        context['tacolettuce']= "tacolettuce"
+      else:
+        context['tacolettuce']= "no-lettuce"
+
+      if 'tacoskittles' in request.POST:
+        context['tacoskittles']= "tacoskittles"
+      else:
+        context['tacoskittles']= "no-tacoskittles"
+
     else:
       context['taco'] = "no-taco"
+
+
     
     if 'salad' in request.POST:
       context['salad'] = "salad"
       total_price += 13
+
+      if 'dressing' in request.POST:
+        context['dressing'] = "dressing"
+      else:
+        context['dressing'] = "no-dressings"
+
+      if 'craisins' in request.POST:
+        context['craisins'] = "craisins"
+      else:
+        context['craisins'] = "no-craisins"
+
+      if 'laffy_taffy' in request.POST:
+        context['laffy_taffy'] = "laffy_taffy"
+      else:
+        context['laffy_taffy'] = "no_laffy_taffy"
+
     else:
       context['salad'] = "no-salad"
 
     if 'soup' in request.POST:
       context['soup'] = "soup"
       total_price += 14
+
+      if 'spicypeppers' in request.POST:
+        context['spicypeppers'] = "spicypeppers"
+      else:
+        context['spicypeppers'] = "nospice"
+
+      if 'fruitgushers' in request.POST:
+        context['fruitgushers'] = "fruitgushers"
+      else:
+        context['fruitgushers'] = "nogush"
+
     else:
       context['soup'] = "no-soup"
     
     if 'burger' in request.POST:
       context['burger'] = "burger"
       total_price += 9
+
+      if 'burger_lettuce' in request.POST:
+        context['burger_lettuce'] = "burger_lettuce"
+      else:
+        context['burger_lettuce'] = "no_burger_lettuce"
+
+      if 'burger_cheese' in request.POST:
+        context['burger_cheese'] = "burger_cheese"
+      else:
+        context['burger_cheese'] = "no_burger_cheese"
+      
+      if 'burger_kids' in request.POST:
+        context['burger_kids'] = "burger_kids"
+      else:
+        context['burger_kids'] = "no_burger_kids"
     else:
       context['burger'] = "no-burger"
     
     if 'giro' in request.POST:
       context['giro'] = "giro"
       total_price += 12
+      if 'feta' in request.POST:
+        context['feta'] = "feta"
+      else:
+        context['feta'] = "no_feta"
+      if 'ziki' in request.POST:
+        context['ziki'] = "ziki"
+      else:
+        context['ziki'] = "no_ziki"
+      if 'mike' in request.POST:
+        context['mike'] = "mike"
+      else:
+        context['mike'] = "no_mike"
     else:
       context['giro'] = "no-giro"
     

@@ -2,49 +2,174 @@
 {% load static %}
 
 {% block content %}
+    <div class="order">
 
+        <div class="thanks">Thank you, {{ name }}. We will notify you of the arrival of your savory
+        transaction via your phone number of {{ phone }}, and your 
+        email of {{ email }}.</div>
+        <br>
     
+        <table>
+            <tbody>
+                <tr>
+                    <td class="type">
+                        Items Ordered:
+                    </td>
 
-    {% if pork == "pork" %}    
-        <p>{{ pork }}</p>
-    {% endif %}
+                    <td>
+                        <div class="toppings">
+                        {% if pork == "pork" %}    
+                            --- Pork
+                            <br margin="30px 0">
+                        {% endif %}
+                        
+                        {% if salad == "salad" %}    
+                        --- Salad
+                
+                            {% if dressing == "dressing" or craisins == "craisins" or laffy_taffy == "laffy_taffy" %}
+                                {% if dressing == "dressing" %}  
+                                    +dressing
+                                {% endif %}
+                
+                                {% if craisins == "craisins" %}  
+                                    +craisins
+                                {% endif %}
+                
+                                {% if laffy_taffy == "laffy_taffy" %}  
+                                    +Laffy Taffy
+                                {% endif %}
+                            {% endif %}
+                            <br>
+                        {% endif %}
 
-    {% if salad == "salad" %}    
-        <p>{{ salad }}</p>
-    {% endif %}
+                        {% if taco == "taco" %}    
+                            --- Taco
+                
+                            {% if tacomato == "tomato" or tacocheese == "tacocheese" or tacolettuce == "tacolettuce" or tacoskittles == "tacoskittles" %}
+                                {% if tacomato == "tomato" %}  
+                                    +tomato
+                                {% endif %}
+                
+                                {% if tacocheese == "tacocheese" %}  
+                                    +cheese
+                                {% endif %}
+                
+                                {% if tacolettuce == "tacolettuce" %}  
+                                    +lettuce
+                                {% endif %}
+                
+                                {% if tacoskittles == "tacoskittles" %}  
+                                    +skittles
+                                {% endif %}
+                
+                            {% endif %}
+                            <br>
+                        {% endif %}
 
-    {% if taco == "taco" %}    
-        <p>{{ taco }}</p>
-    {% endif %}
+                    {% if soup == "soup" %}    
+                        --- Soup
+            
+                        {% if fruitgushers == "fruitgushers" or spicypeppers == "spicypeppers" %}  
+                        
+                            {% if fruitgushers == "fruitgushers" %}  
+                                +Fruit Gushers
+                            {% endif %} 
+                            
+                            {% if spicypeppers == "spicypeppers" %}  
+                                +spicy peppers
+                            {% endif %} 
+                        {% endif %}
+                        
+                        <br>
+                    {% endif %}
+            
+                    {% if burger == "burger" %}    
+                        --- Burger
+            
+                        {% if burger_lettuce == "burger_lettuce" %}  
+                            +lettuce
+                        {% endif %} 
+            
+                        {% if burger_cheese == "burger_cheese" %}  
+                            +cheese
+                        {% endif %} 
+            
+                        {% if burger_kids == "burger_kids" %}  
+                            +Sour Patch Kids
+                        {% endif %} 
+                        <br>
+            
+                    {% endif %}
+            
+                    {% if giro == "giro" %}    
+                        --- Giro
+            
+                        {% if feta == "feta" or ziki == "ziki" or mike == "mike" %}
+            
+                            {% if feta == "feta" %}    
+                                +feta cheese
+                            {% endif %}
+            
+                            {% if ziki == "ziki" %}    
+                                +ziki sauce
+                            {% endif %}
+            
+                            {% if mike == "mike" %}    
+                                +Mike and Ikes
+                            {% endif %}
+                        
+                        {% endif %}
+                        <br>
+                    {% endif %}
+            
+                    {% if daily_special != "no_special" %}    
+                        --- {{ daily_special }}
+                        <br>
+                    {% endif %}
+                    </div>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td class="type">Instructions:</td>
+                    <td>
+                    {% if instructions == "None." %}
+                        No additional instructions.
+                        <br>
+                    {% else %}
+                        <div class="toppings">{{ instructions }}</div>
+                        <br>
+                    {% endif %}
+                    </td>
+                </tr>
 
-    {% if soup == "soup" %}    
-        <p>{{ soup }}</p>
-    {% endif %}
+                <tr>
+                    <td class="type">Total Price: </td>
+                    <td><div class="toppings">${{ price }}</div></td>
+                </tr>
 
-    {% if burger == "burger" %}    
-        <p>{{ burger }}</p>
-    {% endif %}
-
-    {% if giro == "giro" %}    
-        <p>{{ giro }}</p>
-    {% endif %}
-
-    {% if daily_special != "no_special" %}    
-        <p>{{ daily_special }}</p>
-    {% endif %}
-
-    {% if instructions == "" %}
-        <p>No additional instructions.</p>
-    {% else %}
-        Instructions: <p>{{ instructions }}</p>
-    {% endif %}
+            </tbody>
+            
+        </table>
+        <br>
+        <div class="arrive">Your order will arrive at {{ time }}.</div>
 
 
-    <p>Total: ${{ price }}</p><br>
+        <p></p><br>
 
-    <p>Your order will arrive at {{ time }}.</p>
-
-    
         
+
+    </div>
 
 {% endblock %}

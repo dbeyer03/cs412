@@ -2,43 +2,123 @@
 {% load static %}
 
 {% block content %}
-    <div class="home">
+    <div class="order">
+        
         <form action="{% url 'confirmation' %}" method="post">
         
         {% csrf_token %}
-        
-        Food to Order:<br>
-        <input type="checkbox" id="taco" name="taco">
-        taco ($8)<br>
 
-        <input type="checkbox" id="salad" name="salad">
-        salad ($13)<br>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="type">
+                        <ul class="main"><u>Main Meals:</u></ul>
+                        <ul class="main"><img class="yum" src= "{% static 'images/burger.jpg' %}" alt="burger" width="175" height="175"></ul>
+                        <ul class="main"><img class="yum" src= "{% static 'images/taco.jpg' %}" alt="taco" width="175" height="175"></ul>
+                        <ul class="main"><img class="yum" src= "{% static 'images/pork.webp' %}" alt="pork" width="175" height="175"></ul>
+                        
+                    </td>
+                    <td><input type="checkbox" id="taco" name="taco">
+                        taco ($8)<br>
+                        <div class="toppings">
+                            <input type="checkbox" id="tacomato" name="tacomato">
+                            tomato<br>
+                            <input type="checkbox" id="tacocheese" name="tacocheese">
+                            cheese<br>
+                            <input type="checkbox" id="tacolettuce" name="tacolettuce">
+                            lettuce<br>
+                            <input type="checkbox" id="tacoskittles" name="tacoskittles">
+                            skittles
+                        </div>
+                        <br>
 
-        <input type="checkbox" id="pork" name="pork">
-        pork ($16)<br>
 
-        <input type="checkbox" id="soup" name="soup">
-        soup ($14)<br>
+                        <input type="checkbox" id="salad" name="salad">
+                        salad ($13)<br>
+                        <div class="toppings">
+                            <input type="checkbox" id="dressing" name="dressing">
+                            dressing<br>
+                            <input type="checkbox" id="craisins" name="craisins">
+                            craisins<br>
+                            <input type="checkbox" id="laffy_taffy" name="laffy_taffy">
+                            laffy-taffy
+                        </div>
+                        <br>
 
-        <input type="checkbox" id="burger" name="burger">
-        burger ($9)<br>
+                        <input type="checkbox" id="pork" name="pork">
+                        pork ($16)<br>
+                        <br>
 
-        <input type="checkbox" id="giro" name="giro">
-        giro ($12)<br>
-        
+                        <input type="checkbox" id="soup" name="soup">
+                        soup ($14)<br>
+                        <div class="toppings">
+                            <input type="checkbox" id="spicypeppers" name="spicypeppers">
+                            spicy peppers<br>
+                            <input type="checkbox" id="fruitgushers" name="fruitgushers">
+                            fruit gushers
+                        </div>
 
-        Special of the day:<br>
-        <input type="checkbox" id="daily_special" name="daily_special">
-        {{ daily_special }} ($15)<br>
-        Please share any special instructions:<br>
-        <textarea id="instructions" name="instructions">
-        </textarea><br>
-        Name:<br>
-        <input type="text" id="name" name="name" required="required"><br>
-        Phone:<br>
-        <input type="text" id="phone" name="phone" required="required"><br>
-        Email:<br>
-        <input type="text" id="email" name="email" required="required"><br>
+                        <br>
+
+                        <input type="checkbox" id="burger" name="burger">
+                        burger ($9)<br>
+
+                        <div class="toppings">
+                            <input type="checkbox" id="burger_lettuce" name="burger_lettuce">
+                            lettuce<br>
+                            <input type="checkbox" id="burger_cheese" name="burger_cheese">
+                            cheese<br>
+                            <input type="checkbox" id="burger_kids" name="burger_kids">
+                            sour patch kids
+                        </div>
+                        
+                        <br>
+                
+                        <input type="checkbox" id="giro" name="giro">
+                        giro ($12)<br>
+
+                        <div class="toppings">
+                            <input type="checkbox" id="feta" name="feta">
+                            feta cheese<br>
+                            <input type="checkbox" id="ziki" name="ziki">
+                            ziki sauce<br>
+                            <input type="checkbox" id="mike" name="mike">
+                            Mike and Ikes
+                        </div>
+
+                        <br>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="type"><u>Special of the day:</u></td>
+                    <td><input type="checkbox" id="daily_special" name="daily_special" value="{{ daily_special }}">
+                        {{ daily_special }} ($15)<br></td>
+                </tr>
+
+                <tr>
+                    <td class="type"><u>Please share any special instructions:</u></td>
+                    <td><textarea id="instructions" name="instructions">
+                    </textarea></td>
+                </tr>
+
+                <tr>
+                    <td class="type"><u>Name:</u></td>
+                    <td> <input type="text" id="name" name="name" required="required"></td>
+                </tr>
+
+                <tr>
+                    <td class="type"><u>Phone:</u></td>
+                    <td><input type="text" id="phone" name="phone" required="required"></td>
+                </tr>
+
+                <tr>
+                    <td class="type"><u>Email:</u></td>
+                    <td><input type="text" id="email" name="email" required="required"></td>
+                </tr>
+            </tbody>
+        </table>
+
 
         <input type="submit" value="Submit" align="center">
 
