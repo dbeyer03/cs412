@@ -26,6 +26,7 @@ def main(request):
 def order(request):
   template_name = "restaurant/order.html"
 
+  # The four special menu items.
   specials = {
     'special1': "Sour Patch Taco Deluxe",
     'special2': "Watercress Salad Topped With Nerds and Sweet Tarts",
@@ -33,9 +34,8 @@ def order(request):
     'special4': "Sweet and Cherry-Sour Soup",
   }
 
+  #pick_item function used to pick random meal.
   daily_special = pick_item(specials)
-
-  
 
   context = {
     'daily_special':daily_special,
@@ -46,8 +46,8 @@ def order(request):
 def confirmation(request):
   template_name = "restaurant/confirmation.html"
 
-  if request.POST:
 
+  if request.POST:
     name = request.POST['name']
     phone = request.POST['phone']
     email = request.POST['email']
@@ -61,6 +61,9 @@ def confirmation(request):
     }
     total_price = 0
 
+    # checks which menu items were in the meal.
+    # adds them to the context if selected.
+    # Adds the prices to total_price.
     if 'pork' in request.POST:
       context['pork'] = "pork"
       total_price += 16
@@ -71,6 +74,8 @@ def confirmation(request):
       context['taco'] = "taco"
       total_price += 8
 
+      # adds toppings if selected, but 
+      # only if the dish was selected.
       if 'tacomato' in request.POST:
         context['tacomato']= "tomato"
       else:
@@ -185,11 +190,12 @@ def confirmation(request):
     else:
       context['instructions'] = "None."
     
+    # stores the price as a variable.
     context['price'] = str(total_price)
 
+    # stores random time 30-60 minutes from now.
     context['time'] = datetime.now()+timedelta(minutes=random.randrange(30,60))
 
-    # +timedelta(minutes=random.randrange(30,60))
 
     return render(request,template_name, context)
   return redirect("order")
