@@ -11,14 +11,18 @@
         <table>
             <tbody>
                 <tr>
+                    
                     <td class="type">
                         <ul class="main"><u>Main Meals:</u></ul>
-                        <ul class="main"><img class="yum" src= "{% static 'images/burger.jpg' %}" alt="burger" width="175" height="175"></ul>
-                        <ul class="main"><img class="yum" src= "{% static 'images/taco.jpg' %}" alt="taco" width="175" height="175"></ul>
-                        <ul class="main"><img class="yum" src= "{% static 'images/pork.webp' %}" alt="pork" width="175" height="175"></ul>
+                        <!--The photos next to the menu.-->
+                        <ul class="main"><img class="yum" src= "https://content.instructables.com/FIG/B7IH/HA4MBBVI/FIGB7IHHA4MBBVI.jpg?auto=webp&frame=1&width=841&height=1024&fit=bounds&md=MjAxNC0wNi0xNSAwOToyNjo1MS4w" alt="pork" width="175" height="175"></ul>
+                        <ul class="main"><img class="yum" src= "https://cdn11.bigcommerce.com/s-vm6doh2w4n/images/stencil/original/products/7258/18859/qqiol8twq0wjr3f4bdjb__32998.1677141963.jpg?c=1" alt="taco" width="175" height="175"></ul>
+                        <ul class="main"><img class="yum" src= "https://www.thefoodinmybeard.com/wp-content/uploads/2022/08/burger6-1024x683.jpg" alt="burger" width="175" height="145"></ul>
                         
                     </td>
-                    <td><input type="checkbox" id="taco" name="taco">
+                    <td>
+                        <!--The taco and its toppings.-->
+                        <input type="checkbox" id="taco" name="taco">
                         taco ($8)<br>
                         <div class="toppings">
                             <input type="checkbox" id="tacomato" name="tacomato">
@@ -32,7 +36,7 @@
                         </div>
                         <br>
 
-
+                        <!--The salad and its toppings.-->
                         <input type="checkbox" id="salad" name="salad">
                         salad ($13)<br>
                         <div class="toppings">
@@ -45,10 +49,12 @@
                         </div>
                         <br>
 
+                        <!--The pork, with no toppings.-->
                         <input type="checkbox" id="pork" name="pork">
                         pork ($16)<br>
                         <br>
 
+                        <!--The soup and its toppings.-->
                         <input type="checkbox" id="soup" name="soup">
                         soup ($14)<br>
                         <div class="toppings">
@@ -60,9 +66,9 @@
 
                         <br>
 
+                        <!--The burger and its toppings.-->
                         <input type="checkbox" id="burger" name="burger">
                         burger ($9)<br>
-
                         <div class="toppings">
                             <input type="checkbox" id="burger_lettuce" name="burger_lettuce">
                             lettuce<br>
@@ -74,9 +80,9 @@
                         
                         <br>
                 
+                        <!--The giro and its toppings.-->
                         <input type="checkbox" id="giro" name="giro">
                         giro ($12)<br>
-
                         <div class="toppings">
                             <input type="checkbox" id="feta" name="feta">
                             feta cheese<br>
@@ -91,17 +97,20 @@
                 </tr>
 
                 <tr>
+                    <!--The special item of the day.-->
                     <td class="type"><u>Special of the day:</u></td>
                     <td><input type="checkbox" id="daily_special" name="daily_special" value="{{ daily_special }}">
                         {{ daily_special }} ($15)<br></td>
                 </tr>
 
                 <tr>
+                    <!--The box for special instructions.-->
                     <td class="type"><u>Please share any special instructions:</u></td>
                     <td><textarea id="instructions" name="instructions">
                     </textarea></td>
                 </tr>
 
+                <!--The user's information.-->
                 <tr>
                     <td class="type"><u>Name:</u></td>
                     <td> <input type="text" id="name" name="name" required="required"></td>
@@ -119,7 +128,7 @@
             </tbody>
         </table>
 
-
+        <!--The submit button.-->
         <input type="submit" value="Submit" align="center">
 
 

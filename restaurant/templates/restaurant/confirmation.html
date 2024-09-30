@@ -17,15 +17,18 @@
                     </td>
 
                     <td>
+                        
                         <div class="toppings">
+                        <!--Checks if pork was selected.-->
                         {% if pork == "pork" %}    
                             --- Pork
                             <br margin="30px 0">
                         {% endif %}
                         
+                        <!--Checks if salad was selected.-->
                         {% if salad == "salad" %}    
                         --- Salad
-                
+                            <!--Checks which toppings were selected. Everything below functions similary.-->
                             {% if dressing == "dressing" or craisins == "craisins" or laffy_taffy == "laffy_taffy" %}
                                 {% if dressing == "dressing" %}  
                                     +dressing
@@ -42,9 +45,9 @@
                             <br>
                         {% endif %}
 
+                        <!--Checks if taco was selected.-->
                         {% if taco == "taco" %}    
                             --- Taco
-                
                             {% if tacomato == "tomato" or tacocheese == "tacocheese" or tacolettuce == "tacolettuce" or tacoskittles == "tacoskittles" %}
                                 {% if tacomato == "tomato" %}  
                                     +tomato
@@ -66,6 +69,7 @@
                             <br>
                         {% endif %}
 
+                    <!--Checks if soup was selected.-->
                     {% if soup == "soup" %}    
                         --- Soup
             
@@ -83,6 +87,7 @@
                         <br>
                     {% endif %}
             
+                    <!--Checks if burger was selected.-->
                     {% if burger == "burger" %}    
                         --- Burger
             
@@ -101,6 +106,7 @@
             
                     {% endif %}
             
+                    <!--Checks if giro was selected.-->
                     {% if giro == "giro" %}    
                         --- Giro
             
@@ -122,6 +128,7 @@
                         <br>
                     {% endif %}
             
+                    <!--Checks if the special was selected.-->
                     {% if daily_special != "no_special" %}    
                         --- {{ daily_special }}
                         <br>
@@ -142,6 +149,7 @@
                 <tr></tr>
                 <tr></tr>
                 <tr>
+                    <!--Checks if instructions were selected.-->
                     <td class="type">Instructions:</td>
                     <td>
                     {% if instructions == "None." %}
@@ -155,6 +163,7 @@
                 </tr>
 
                 <tr>
+                    <!--Returns the total price.-->
                     <td class="type">Total Price: </td>
                     <td><div class="toppings">${{ price }}</div></td>
                 </tr>
