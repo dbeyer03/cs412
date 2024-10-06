@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     'restaurant',
     'quotes', ## quotes app for assign 3!
+    'octoberone',
+    'mini_fb',
 ]
 
 MIDDLEWARE = [

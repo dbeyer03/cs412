@@ -1,0 +1,124 @@
+/*Used to set the background color*/
+body {
+    background-color: rgb(230, 216, 237);
+}
+
+/* Used for the quotation/about text.*/
+p {
+    color: rgb(65, 8, 118);
+    font-size:20px;
+    margin:20 auto;
+    width:95%;
+}
+
+/*Used for the text at the bottom of the page.*/
+p2 {
+    color: rgb(163, 112, 211);
+    font-style: italic;
+    text-align:center;
+    align-items:center;
+    
+}
+
+/*Used for the sub-headers on each page. */
+h1 {
+    color: rgb(125, 9, 60);
+    font-size: 55px;
+    overflow:auto; 
+}
+
+/*Used for the top-most header. */
+h2 {
+    border-radius:50px;
+    background-color: rgb(65, 8, 118);
+    margin:0 auto;
+    text-align:center;
+    height:100px;
+    max-width:1300px;
+    font-size:105px;
+    padding-bottom:30px;
+    color: rgb(230, 216, 237);
+}
+
+/* Used for the top header's background*/
+head-container {
+    background-color: rgb(65, 8, 118);
+}
+
+/*Used for the links to the different tabs. */
+a {
+    border-radius:50px;
+    font-style: italic;
+    font-size:16px;
+    min-width:20%;
+    font-family:Arial, Helvetica, sans-serif;
+    padding-left:50px;
+    padding-right:50px;
+    padding-top:10px;
+    padding-bottom:10px;
+    margin:10 auto;
+    background-color: rgb(125, 9, 60);
+    color: rgb(230, 216, 237);
+    margin-left:10px;
+    margin-right:10px;
+}
+
+a:hover {
+    font-size:22px;
+    text-shadow: 50px;
+    box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5);
+    background-color: rgb(255, 20, 122);
+    transition-duration: 0.2s;
+}
+
+/*Used to order the links to the HTML pages. */
+ul {
+    padding-left:0px;
+    text-align:center;
+    width:100%;
+    padding-top:35px;
+    padding-bottom:5px;
+    margin:0 auto;
+    
+}
+
+/*Used to set the location and look of the images. */
+img {
+    border-radius: 10px;
+}
+
+img.all {
+    padding-left:15px;
+    padding-right:15px;
+    padding-top:0px;
+    padding-bottom:0px;
+    border-radius:20px;
+}
+
+/* The white box containing the information for each page.*/
+div.two {
+    outline: 0.5px dashed rgb(138, 138, 138);
+    outline-offset: 10px;
+    vertical-align: middle;
+    text-align: center;
+    width:500px;
+    margin: 20 auto;
+    background-color:azure;
+    padding-left:5px;
+    padding-right:5px;
+    padding-bottom:5px;
+    border-radius: 10px;
+}
+
+/* For my personal info at the bottom of the page.*/
+div.three {
+    text-align:center;
+}
+
+/* Used to order all the quotes.*/
+ol {
+    text-align:left;
+    align-items:left;
+    color: rgb(65, 8, 118);
+}
+
