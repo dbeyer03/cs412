@@ -7,12 +7,22 @@
     </head>
 
     <body>
-
     
+
+    <h1>Shrunken Facebook</h1>
+
+    <div class="links">
+        <a href="{% url 'show_all_profiles' %}">Profiles</a>
+        <a href="{% url 'info' %}">About Us</a>
+    </div>
 
     {% block content %}
 
     {% endblock %}
+
+    <div class="footer">
+        <i>2024, all rights reversed.</i>
+    </div>
 
     </body>
 </html>

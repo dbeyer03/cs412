@@ -1,2 +1,22 @@
 {% extends 'mini_fb/base.html' %}
 {% load static %}
+
+{% block content %}
+    <div class="overseer">
+        <h2><u>Your Best Friends</u></h2>
+    <div class="group">
+    {% for p in profile %}
+            
+            <div class="profile">
+                <div class="image">
+                <img src="{{p.profile_image_url}}" alt="{{p.profile_image_url}}">
+                </div>  
+                <p><b>{{p.first_name}} {{p.last_name}}</b></p>
+                <p class="two">{{p.city}}</p>
+                <p class="two"><i>{{p.email_address}}</i></p>
+            </div>
+
+    {% endfor %}
+    </div>
+    </div>
+{% endblock %}

@@ -16,3 +16,13 @@ class ShowAllProfilesView(ListView):
   model = Profile
   template_name = 'mini_fb/show_all_profiles.html'
   context_object_name = 'profile'
+
+def info_page(request):
+
+  template_name = "mini_fb/info.html"
+
+  context = {
+    'current_time': time.ctime(),
+  }
+
+  return render(request,template_name,context)
