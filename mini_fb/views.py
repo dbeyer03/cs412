@@ -4,7 +4,7 @@ import time
 import random
 from datetime import timedelta, date, datetime
 from . models import *
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
 def home_page_view(request):
@@ -26,3 +26,9 @@ def info_page(request):
   }
 
   return render(request,template_name,context)
+
+class ShowProfilePageView(DetailView):
+  model = Profile 
+  template_name = 'mini_fb/show_profile_page.html'
+  context_object_name = 'profile'
+
