@@ -8,5 +8,27 @@
     {{ profile.city }}
     {{ profile.email_address }}
 
+    {% if profile.get_status_messages %}
+
+        {% for m in profile.get_status_messages %}
+
+            by {{ m.timestamp }}
+
+                {{m.text}}
+
+        {% endfor %}
+
+    {% else %}
+
+        {% if profile.pk|divisibleby:4 or profile.pk|divisibleby:5 %}   
+            <h2>EGG</h2>
+        {% else %}
+            <h2>A bit lonely 'er.</h2>
+        {% endif %}
+
+    {% endif %}
+
+
+
 
 {% endblock %}

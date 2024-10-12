@@ -4,7 +4,9 @@ import time
 import random
 from datetime import timedelta, date, datetime
 from . models import *
-from django.views.generic import ListView, DetailView
+from . forms import *
+from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse ## NEW
 
 # Create your views here.
 def home_page_view(request):
@@ -31,6 +33,17 @@ class ShowProfilePageView(DetailView):
   model = Profile 
   template_name = 'mini_fb/show_profile.html'
   context_object_name = 'profile'
+
+
+class CreateProfileView(CreateView):
+  form_class = CreateProfileForm
+
+  template_name = 'mini_fb/create_profile_form.html'
+
+  def get_absolute_url(self) -> str:
+    '''Return the URL to redirect to after successfully submitting form.'''
+    return reverse('profile',kwargs={'pk': self.kwargs['pk']})
+
 
 
 
