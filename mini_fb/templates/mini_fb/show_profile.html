@@ -1,0 +1,12 @@
+{% extends 'mini_fb/base.html' %}
+{% load static %}
+
+{% block content %}
+<img src="{{profile.profile_image_url}}" alt="{{profile.profile_image_url}}">
+    {{ profile.first_name }}
+    {{ profile.last_name }}
+    {{ profile.city }}
+    {{ profile.email_address }}
+
+
+{% endblock %}

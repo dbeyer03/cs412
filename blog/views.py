@@ -11,7 +11,7 @@ class ShowAllView(ListView):
     '''A view to show all Articles.'''
 
     model = Article
-    template_name = 'blog/show_all.html'
+    template_name = 'blog/show_all_buh.html'
     context_object_name = 'articles'
 
 class RandomArticleView(DetailView):
