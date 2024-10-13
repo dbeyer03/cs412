@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse ## NEW
 
 # Create your models here.
 class Profile(models.Model):
@@ -15,7 +16,10 @@ class Profile(models.Model):
     '''Retrieve status message for this Profile.'''
     message = StatusMessage.objects.filter(profile=self)
     return message
-  
+
+  def get_absolute_url(self):
+    '''Return the URL to redirect to after successfully submitting form.'''
+    return reverse('show_profile',kwargs={'pk': self.pk})
 
 
 class StatusMessage(models.Model):

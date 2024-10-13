@@ -37,12 +37,15 @@ class ShowProfilePageView(DetailView):
 
 class CreateProfileView(CreateView):
   form_class = CreateProfileForm
-
   template_name = 'mini_fb/create_profile_form.html'
 
-  def get_absolute_url(self) -> str:
-    '''Return the URL to redirect to after successfully submitting form.'''
-    return reverse('profile',kwargs={'pk': self.kwargs['pk']})
+  
+
+  
+
+  
+
+  
 
 
 

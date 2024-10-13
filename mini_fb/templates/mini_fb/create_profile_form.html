@@ -5,11 +5,8 @@
     <form method="POST">
         {% csrf_token %}
 
-        First Name: <input type="text" name="first_name" required="" id="{{first_name}}"><br>
-        Last Name: <input type="text" name="last_name" required="" id="{{last_name}}"><br>
-        City: <input type="text" name="city" required="" id="{{city}}"><br>
-        Email Address: <input type="text" name="email_address" required="" id="{{email_address}}"><br>
-        Profile Image Link: <input type="text" name="profile_image_url" id="{{profile_image_url}}"><br>
+        {{form.as_table}}
+
 
         <input type="submit" value="Submit">
 
