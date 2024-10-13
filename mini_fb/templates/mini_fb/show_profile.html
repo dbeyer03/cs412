@@ -2,23 +2,45 @@
 {% load static %}
 
 {% block content %}
-<img src="{{profile.profile_image_url}}" alt="{{profile.profile_image_url}}">
-    {{ profile.first_name }}
-    {{ profile.last_name }}
-    {{ profile.city }}
-    {{ profile.email_address }}
+    <div class="overseer-two">
+    <h2>A Profile</h2>
+    <div class="group-alone">
+        
+        <div class="image">
+            <img class="personal" src="{{profile.profile_image_url}}" alt="{{profile.profile_image_url}}">
+        </div>
+        <div class="profile_info">
+            <ul>
+                <li><b>NAME:</b> <p2 color="red">{{ profile.first_name }} {{ profile.last_name }}</p2></li>
+                <li><b>CITY:</b> <u>{{ profile.city }}</u></li>
+                <li><b>EMAIL:</b> <i>{{ profile.email_address }}</i></li>
+            </ul>
+        </div>
+    </div>
+    
 
-    <a class="button" href="{% url 'create_status_form' profile.pk %}">Status Form</a>
+    <h2>Status Forms For {{ profile.first_name }} {{profile.last_name}}</h2>
 
+    <div class="status">
+    <a class="post" href="{% url 'create_status_form' profile.pk %}">Post Status Form</a>
+
+    
     {% if profile.get_status_messages %}
 
+        <ul>
         {% for m in profile.get_status_messages %}
 
-            by {{ m.timestamp }}
-
-                {{m.text}}
+            
+            <div class="messages";>
+                <li>
+                    {{m.text}}<br>
+                    <div class="posted">{{ profile.first_name }} {{profile.last_name}} posted at {{ m.timestamp }}</div>
+                </li>
+                
+            </div>
 
         {% endfor %}
+        </ul>
 
     {% else %}
 
@@ -29,6 +51,8 @@
         {% endif %}
 
     {% endif %}
+    </div>
+    </div>
 
 
 
