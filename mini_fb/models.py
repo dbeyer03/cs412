@@ -25,8 +25,8 @@ class Profile(models.Model):
 class StatusMessage(models.Model):
   text = models.TextField(blank=False)
   timestamp = models.DateTimeField(auto_now=True)
-  profile = models.ForeignKey("profile", on_delete=models.CASCADE)
+  profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
 
   def __str__(self):
     '''Return a string representation of this object.'''
-    return f'{self.profile} {self.text}'
+    return f'{self.text} {self.timestamp}'

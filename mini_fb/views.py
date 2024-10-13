@@ -39,8 +39,38 @@ class CreateProfileView(CreateView):
   form_class = CreateProfileForm
   template_name = 'mini_fb/create_profile_form.html'
 
-  
+class CreateStatusMessageView(CreateView):
+  form_class = CreateStatusMessageForm 
+  template_name = 'mini_fb/create_status_form.html'
 
+  def get_context_data(self, **kwargs: any) -> dict[str,any]:
+
+    context = super().get_context_data(**kwargs)
+
+    profile = Profile.objects.get(pk=self.kwargs['pk'])
+
+    context['profile'] = profile 
+    return context
+
+  def form_valid(self,form):
+
+    print(f'CreateStatusMessageView.form_valid(): form={form.cleaned_data}')
+    print(f'CreateStatusMessageView.form_valid(): self.kwargs={self.kwargs}')
+
+    # find the Profile indicated by the PK from the url pattern.
+    profile = Profile.objects.get(pk=self.kwargs['pk'])
+
+    # Attach Profile to instant of comment to set FK
+    form.instance.profile = profile 
+
+    # delegate work to superclass version of method
+    return super().form_valid(form)
+
+  def get_success_url(self) -> str: 
+
+    #redirects the URL on success.
+    profile = Profile.objects.get(pk=self.kwargs['pk'])
+    return reverse('show_profile',kwargs={'pk':profile.pk})
   
 
   

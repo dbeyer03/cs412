@@ -8,6 +8,8 @@
     {{ profile.city }}
     {{ profile.email_address }}
 
+    <a class="button" href="{% url 'create_status_form' profile.pk %}">Status Form</a>
+
     {% if profile.get_status_messages %}
 
         {% for m in profile.get_status_messages %}

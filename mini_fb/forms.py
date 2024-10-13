@@ -13,3 +13,10 @@ class CreateProfileForm(forms.ModelForm):
   class Meta:
     model = Profile
     fields = ['first_name','last_name','city','email_address','profile_image_url']
+
+class CreateStatusMessageForm(forms.ModelForm):
+  text = forms.CharField(label="Status Message", required=True)
+
+  class Meta:
+    model = StatusMessage 
+    fields = ['text']
