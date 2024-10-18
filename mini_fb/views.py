@@ -64,8 +64,21 @@ class CreateStatusMessageView(CreateView):
     # find the Profile indicated by the PK from the url pattern.
     profile = Profile.objects.get(pk=self.kwargs['pk'])
 
-    # Attach Profile to instant of comment to set FK
+    # Attach Profile to instance of comment to set FK
     form.instance.profile = profile 
+
+    # save the status message to database
+    sm = form.save()
+
+    # read the file from the form:
+    files = self.request.FILES.getlist('files')
+
+    # for each file in files
+    for file in files:
+      add_image = Image()
+      add_image.image_file = file
+      add_image.status_message = sm
+      Image.save(add_image)
 
     # delegate work to superclass version of method
     return super().form_valid(form)
