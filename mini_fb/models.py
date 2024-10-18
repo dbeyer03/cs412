@@ -26,7 +26,20 @@ class StatusMessage(models.Model):
   text = models.TextField(blank=False)
   timestamp = models.DateTimeField(auto_now=True)
   profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
+  
+  def get_images(self):
+    '''Retrieve all images for this Status Message.'''
+    images = Image.objects.filter(status_message=self)
+    return images
 
   def __str__(self):
     '''Return a string representation of this object.'''
     return f'{self.text} {self.timestamp}'
+
+class Image(models.Model):
+  image_file = models.ImageField(blank=True) # an actual image
+  status_message = models.ForeignKey("StatusMessage", on_delete=models.CASCADE)
+  timestamp = models.DateTimeField(auto_now=True)
+
+  def __str__(self):
+    return f'{self.timestamp}'

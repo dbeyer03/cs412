@@ -38,3 +38,4 @@ class ArticleView(DetailView):
     model = Article
     template_name = 'blog/article.html'
     context_object_name = "article" # note the singular name
+
