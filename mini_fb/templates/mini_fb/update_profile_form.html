@@ -1,0 +1,25 @@
+{% extends 'mini_fb/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <form method = 'POST' enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form %}
+            {{field.name}}
+            {{field}}
+        
+        {% endfor %}
+
+        <input type='submit' name='update_profile' value='Update Profile'>
+
+        <form action="{% url 'show_profile' profile.pk %}">
+            <input type='submit' name = 'cancel' value= 'Cancel Update'>
+        </form>
+
+    </form>
+
+
+
+{% endblock %}

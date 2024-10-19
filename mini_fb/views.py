@@ -5,8 +5,9 @@ import random
 from datetime import timedelta, date, datetime
 from . models import *
 from . forms import *
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse ## NEW
+from .forms import UpdateProfileForm
 
 # Create your views here.
 def home_page_view(request):
@@ -89,8 +90,10 @@ class CreateStatusMessageView(CreateView):
     return reverse('show_profile',kwargs={'pk':profile.pk})
   
 
-  
-
+class UpdateProfileView(UpdateView):
+    form_class = UpdateProfileForm 
+    template_name = "mini_fb/update_profile_form.html"
+    model = Profile
   
 
 

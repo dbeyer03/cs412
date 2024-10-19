@@ -21,3 +21,12 @@ class CreateStatusMessageForm(forms.ModelForm):
   class Meta:
     model = StatusMessage 
     fields = ['text']
+  
+class UpdateProfileForm(forms.ModelForm):
+  city = forms.CharField(label="City", required=True)
+  email_address = forms.CharField(label="Email Address", required=True)
+  profile_image_url = forms.URLField(max_length=10000, label="Profile Image", required=True, widget=forms.TextInput(attrs={'placeholder': 'No URLs greater than 200 characters.', 'style': 'min-width: 150px; max-width: 500px; width: 190%;'}))
+
+  class Meta:
+    model = Profile 
+    fields = ['city','email_address','profile_image_url']
