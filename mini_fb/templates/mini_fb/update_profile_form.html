@@ -5,20 +5,34 @@
 
     <form method = 'POST' enctype="multipart/form-data">
         {% csrf_token %}
-
+        <table>
         {% for field in form %}
-            {{field.name}}
-            {{field}}
-        
+            <tr>
+                {% if field.name == "city" %}
+                    <th>City</th>
+                {% endif %}
+
+                {% if field.name == "email_address" %}
+                    <th>Email Address</th>
+                {% endif %}
+
+                {% if field.name == "profile_image_url" %}
+                    <th>Profile Image URL</th>
+                {% endif %}
+                
+                <td>{{field}}</td>
+            </tr>
+            <br>
         {% endfor %}
+        </table>
 
         <input type='submit' name='update' value='Update Profile'>
 
     </form>
 
-        <form method='GET' action="{% url 'show_profile' profile.pk %}">
-            <input type='submit' name = 'cancel' value= 'Cancel Update'>
-        </form>
+    <form method='GET' action="{% url 'show_profile' profile.pk %}">
+        <input type='submit' name = 'cancel' value= 'Cancel Update'>
+    </form>
 
     
 

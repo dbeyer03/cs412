@@ -40,12 +40,17 @@
                 
             </div>
 
-            {% for img in m.get_images %}
-                <img src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
-            {% endfor %}
+            <div class="status-img">
+                {% for img in m.get_images %}
+                    <img class="status" src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
+                {% endfor %}
+                <br>
+                <a class="status" href="{% url 'update_status_form' m.pk %}">Update</a>
+                <a class="status" href="{% url 'delete_status_form' m.pk %}">Delete</a>
+            </div>
 
-            <a href="{% url 'update_status_form' m.pk %}">Update</a>
-            <a href="{% url 'delete_status_form' m.pk %}">Delete</a>
+            
+            
             
 
         {% endfor %}

@@ -348,3 +348,41 @@ form {
     padding-left:10px;
 
 }
+
+/* Used to stylize the status images.*/
+img.status {
+    height:80px;
+    width:auto;
+    border-color: aquamarine;
+    border-style: solid;
+    border-radius:5px;
+    border-width: 6px;
+    margin-left:1px;
+    margin-right:1px;
+}
+
+div.status-img {
+    margin-left:35px;
+}
+
+a.status {
+    text-decoration: none;
+    font-style:normal;
+    font-family:cursive;
+    background-color:rgb(242, 162, 175);
+    transition:0.3s;
+}
+
+a.status:hover{
+    background-color:rgb(242, 255, 127);
+}
+
+/* Used to stylize the update/delete pages.*/
+th {
+    font-family:cursive;
+}
+
+td {
+    margin-left:5px;
+    padding-left:10px;
+}
