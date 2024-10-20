@@ -5,7 +5,7 @@ import random
 from datetime import timedelta, date, datetime
 from . models import *
 from . forms import *
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse ## NEW
 from .forms import UpdateProfileForm
 
@@ -91,10 +91,60 @@ class CreateStatusMessageView(CreateView):
   
 
 class UpdateProfileView(UpdateView):
-    form_class = UpdateProfileForm 
-    template_name = "mini_fb/update_profile_form.html"
-    model = Profile
-  
+  form_class = UpdateProfileForm 
+  template_name = "mini_fb/update_profile_form.html"
+  model = Profile
+
+  def form_valid(self, form):
+    '''
+    Handle the form submission to update a Profile object.
+    '''
+    print(f'UpdateProfileView: form.cleaned_data={form.cleaned_data}')
+    return super().form_valid(form)
+
+class DeleteStatusMessageView(DeleteView):
+  template_name = "mini_fb/delete_status_form.html"
+  model = StatusMessage 
+  context_object_name = 'status'
+
+  def get_success_url(self):
+    '''Return a the URL to which we should be directed after the delete.'''
+    # get the pk for this status message
+    pk = self.kwargs.get('pk')
+    status = StatusMessage.objects.filter(pk=pk).first() # get one object from QuerySet
+    
+    # find the proile to which this Status Message is related by FK
+    profile = status.profile
+    
+    # reverse to show the article page
+    return reverse('show_profile', kwargs={'pk':profile.pk})
+
+
+class UpdateStatusMessageView(UpdateView):
+  form_class = UpdateStatusMessageForm
+  template_name = "mini_fb/update_status_form.html"
+  model = StatusMessage 
+  context_object_name = 'status'
+
+  def form_valid(self, form):
+    '''
+    Handle the form submission to update a StatusMessage object.
+    '''
+    print(f'UpdateStatusMessageView: form.cleaned_data={form.cleaned_data}')
+    return super().form_valid(form)
+
+  def get_success_url(self):
+    '''Return a the URL to which we should be directed after the delete.'''
+    # get the pk for this status message
+    pk = self.kwargs.get('pk')
+    status = StatusMessage.objects.filter(pk=pk).first() # get one object from QuerySet
+    
+    # find the proile to which this Status Message is related by FK
+    profile = status.profile
+    
+    # reverse to show the article page
+    return reverse('show_profile', kwargs={'pk':profile.pk})
+
 
 
 

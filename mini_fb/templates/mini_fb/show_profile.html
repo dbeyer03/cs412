@@ -44,6 +44,10 @@
                 <img src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
             {% endfor %}
 
+            <a href="{% url 'update_status_form' m.pk %}">Update</a>
+            <a href="{% url 'delete_status_form' m.pk %}">Delete</a>
+            
+
         {% endfor %}
         </ul>
 

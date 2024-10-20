@@ -12,13 +12,15 @@
         
         {% endfor %}
 
-        <input type='submit' name='update_profile' value='Update Profile'>
+        <input type='submit' name='update' value='Update Profile'>
 
-        <form action="{% url 'show_profile' profile.pk %}">
+    </form>
+
+        <form method='GET' action="{% url 'show_profile' profile.pk %}">
             <input type='submit' name = 'cancel' value= 'Cancel Update'>
         </form>
 
-    </form>
+    
 
 
 
