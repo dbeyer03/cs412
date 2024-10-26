@@ -20,7 +20,37 @@ class Profile(models.Model):
   def get_absolute_url(self):
     '''Return the URL to redirect to after successfully submitting form.'''
     return reverse('show_profile',kwargs={'pk': self.pk})
+  
+  def get_friends(self):
+    '''Retrieve friends for this Profilie.'''
+    all_friends = []
 
+    friends1 = Friend.objects.filter(profile1=self)
+    for f1 in friends1:
+      if f1.profile2 is not None:
+        all_friends.append(f1.profile2)
+
+    friends2 = Friend.objects.filter(profile2=self)
+    for f2 in friends2:
+      if f2.profile1 is not None:
+        all_friends.append(f2.profile1)
+
+    return all_friends
+
+  def add_friend(self, other):
+    '''Add friends to this profile.'''
+    #add function to check for duplicated.
+
+    #add function to ensure that self-friending doesn't occur.
+    if self != other:
+
+
+      all_friends = Friend.objects.all()
+      if (all_friends.filter(profile1=self,profile2=other).exists() == False) and (all_friends.filter(profile1=other,profile2=self).exists() == False):
+        new_friend = Friend.objects.create(profile1=self,profile2=other)
+        new_friend.save()
+    return
+    
 
 class StatusMessage(models.Model):
   text = models.TextField(blank=False)
@@ -43,3 +73,11 @@ class Image(models.Model):
 
   def __str__(self):
     return f'{self.timestamp}'
+
+class Friend(models.Model):
+  profile1 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile1",  blank=True, null=True)
+  profile2 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile2",  blank=True, null=True)
+  timestamp = models.DateTimeField(auto_now=True)
+
+  def __str__(self):
+    return f'{self.profile1} and {self.profile2}'

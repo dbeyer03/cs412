@@ -5,7 +5,7 @@ import random
 from datetime import timedelta, date, datetime
 from . models import *
 from . forms import *
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse ## NEW
 from .forms import UpdateProfileForm
 
@@ -145,7 +145,7 @@ class UpdateStatusMessageView(UpdateView):
     # reverse to show the article page
     return reverse('show_profile', kwargs={'pk':profile.pk})
 
+class CreateFriendView(View):
+  template_name = "mini_fb/add_friend.html"
 
-
-
-
+  #def dispatch(self, request, *args, **kwargs):

@@ -17,6 +17,21 @@
             </ul>
         </div>
     </div>
+
+    {% if profile.get_friends %}
+        <p>My Friends...</p>
+
+        {% for p in profile.get_friends %}
+
+        <img class="personal" src="{{p.profile_image_url}}" alt="{{p.profile_image_url}}"><br>
+            {{ p.first_name }} {{ p.last_name }}<br>
+
+        {% endfor %}
+    
+    {% else %}
+        Where are your friends now, senpai?
+
+    {% endif %}
     
 
     <h2>Status Forms For {{ profile.first_name }} {{profile.last_name}}</h2>

@@ -16,4 +16,5 @@ urlpatterns = [
   path(r'profile/<int:pk>/update', views.UpdateProfileView.as_view(), name="update_profile"),
   path(r'status/<int:pk>/delete', views.DeleteStatusMessageView.as_view(), name='delete_status_form'),
   path(r'status/<int:pk>/update', views.UpdateStatusMessageView.as_view(), name='update_status_form'),
+  #path(r'profile/<int:pk>/add_friend/<int:other_pk>',)
 ]

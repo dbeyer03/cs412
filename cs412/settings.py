@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'quotes', ## quotes app for assign 3!
     'mini_fb',
     'blog',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
