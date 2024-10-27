@@ -1,0 +1,17 @@
+{% extends 'mini_fb/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <form method='GET' action="{% url 'show_profile' profile.pk %}">
+        <input type='submit' name = 'cancel' value= 'Back to Profile Page'>
+    </form>
+
+    {% for s in profile.get_news_feed %}
+        {{s.text}}<br>
+        <img src="{{s.profile.profile_image_url}}" alt="{{s.profile.profile_image_url}}"><br>
+        Posted at: {{s.timestamp}}<br>
+
+    {% endfor %}
+
+{% endblock %}

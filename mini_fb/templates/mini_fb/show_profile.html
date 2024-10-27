@@ -18,6 +18,8 @@
         </div>
     </div>
 
+    <a href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
+    <a href="{% url 'news_feed' profile.pk %}">News Feed</a>
     {% if profile.get_friends %}
         <p>My Friends...</p>
 
@@ -32,8 +34,6 @@
         Where are your friends now, senpai?
 
     {% endif %}
-
-    <a href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
     
 
     <h2>Status Forms For {{ profile.first_name }} {{profile.last_name}}</h2>
@@ -66,9 +66,7 @@
                 <a class="status" href="{% url 'delete_status_form' m.pk %}">Delete</a>
             </div>
 
-            
-            
-            
+
 
         {% endfor %}
         </ul>

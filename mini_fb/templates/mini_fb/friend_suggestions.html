@@ -3,6 +3,9 @@
 
 {% block content %}
 
+    <form method='GET' action="{% url 'show_profile' profile.pk %}">
+        <input type='submit' name = 'cancel' value= 'Profile Page'>
+    </form>
 
     {% for p in profile.get_friend_suggestions %}
 
@@ -11,6 +14,8 @@
         {{p.first_name}} {{p.last_name}}<br>
 
     {% endfor %}
+
+    
 
 
 {% endblock %}

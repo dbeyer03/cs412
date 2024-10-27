@@ -58,6 +58,25 @@ class Profile(models.Model):
         suggested_fr.append(p)
 
     return suggested_fr
+
+  def get_news_feed(self):
+    '''returns list of all StatusMessages for this profile
+        and friends of this profile.'''
+
+    #my own status_messages.
+    my_status = Profile.get_status_messages(self)
+
+    #my friends' status messages.
+    all_friends = Profile.get_friends(self)
+    all_status = my_status
+    for f in all_friends:
+      f_status = Profile.get_status_messages(f)
+      all_status = all_status.union(f_status)
+    
+    ordered_fs = all_status.order_by('-timestamp')
+
+    return ordered_fs
+
     
 
 class StatusMessage(models.Model):
