@@ -3,7 +3,9 @@
 
 {% block content %}
     <div class="overseer-two">
-    <h2>A Profile</h2>
+    <h2>{{profile.first_name}} {{profile.last_name}}'s Profile</h2>
+    <a class="post" style="text-align:center; align-self:center;" href="{% url 'news_feed' profile.pk %}">News Feed</a>
+
     <div class="group-alone">
         
         <div class="image">
@@ -17,23 +19,28 @@
             </ul>
         </div>
     </div>
-
-    <a href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
-    <a href="{% url 'news_feed' profile.pk %}">News Feed</a>
-    {% if profile.get_friends %}
-        <p>My Friends...</p>
-
-        {% for p in profile.get_friends %}
-
-        <img class="personal" src="{{p.profile_image_url}}" alt="{{p.profile_image_url}}"><br>
-            {{ p.first_name }} {{ p.last_name }}<br>
-
-        {% endfor %}
     
-    {% else %}
-        Where are your friends now, senpai?
+    {% if profile.get_friends %}
+        
+        <h2>{{profile.first_name}} {{profile.last_name}}'s Friends...</h2>
+        <div class="profile_friends" >
+            {% for p in profile.get_friends %}
+                <a href="{% url 'show_profile' p.pk %}">
+                    <div class="shrunk_profile" >
+                        <img class="profile_friends" src="{{p.profile_image_url}}" alt="{{p.profile_image_url}}">
+                        <p class="shrunk">{{ p.first_name }} {{ p.last_name }}</p>
+                    </div>
+                </a>
+            
+            {% endfor %}
+        </div>
+    
+    {% else %} 
+        <p style="margin-left:20px; font-style:cursive;">Where are your friends now, senpai?</p>
 
     {% endif %}
+    <p style="padding-top:20px;"></p>
+    <a class="post" style="margin-bottom:20px;" href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
     
 
     <h2>Status Forms For {{ profile.first_name }} {{profile.last_name}}</h2>

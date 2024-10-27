@@ -3,19 +3,26 @@
 
 {% block content %}
 
+    <div class="profile_friends">
+        {% for p in profile.get_friend_suggestions %}
+        
+            <div class="shrunk_profile"  style="padding-bottom:30px;">
+                <a class="add_friend" href="{% url 'add_friend' profile.pk p.pk%}">Add Friend</a>
+                <a href="{% url 'show_profile' p.pk %}">
+                    <img class="profile_friends" src="{{p.profile_image_url}}" alt="{{p.profile_image_url}}">
+                </a>
+
+                <a href="{% url 'show_profile' p.pk %}">
+                    <p class="shrunk">{{p.first_name}} {{p.last_name}}</p>
+                </a>
+                <p></p>
+            </div>
+        {% endfor %}
+        
+    </div>
+
     <form method='GET' action="{% url 'show_profile' profile.pk %}">
-        <input type='submit' name = 'cancel' value= 'Profile Page'>
+        <input type='submit' name = 'cancel' value= 'Back To Profile Page'>
     </form>
-
-    {% for p in profile.get_friend_suggestions %}
-
-    <a class="post" href="{% url 'add_friend' profile.pk p.pk%}">Add Friend</a><br>
-        <img class="personal" src="{{p.profile_image_url}}" alt="{{p.profile_image_url}}"><br>
-        {{p.first_name}} {{p.last_name}}<br>
-
-    {% endfor %}
-
-    
-
 
 {% endblock %}

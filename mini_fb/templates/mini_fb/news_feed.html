@@ -3,15 +3,28 @@
 
 {% block content %}
 
-    <form method='GET' action="{% url 'show_profile' profile.pk %}">
-        <input type='submit' name = 'cancel' value= 'Back to Profile Page'>
-    </form>
+    <p  style="margin-top:10px;"></p>
+    <div class="overseer-two">
+        <form method='GET' action="{% url 'show_profile' profile.pk %}"  style="margin-top:10px;">
+            <input type='submit' name = 'cancel' value= 'Back to Profile Page'>
+        </form>
 
-    {% for s in profile.get_news_feed %}
-        {{s.text}}<br>
-        <img src="{{s.profile.profile_image_url}}" alt="{{s.profile.profile_image_url}}"><br>
-        Posted at: {{s.timestamp}}<br>
+        <h2>{{profile.first_name}} {{profile.last_name}}'s News Feed</h2>
 
-    {% endfor %}
+        <div class="messages">
+        {% for s in profile.get_news_feed %}
+
+            <img style="height:30px;width:30px; border-radius: 20px;" src="{{s.profile.profile_image_url}}" alt="{{s.profile.profile_image_url}}"> <div class="posted"><b>{{s.profile.first_name}} {{s.profile.last_name}}</b> <i>posted at: {{s.timestamp}}</i></div>
+
+            {{s.text}}
+                <br>
+            {% for img in s.get_images %}
+                <img class="status" src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
+            {% endfor %}
+            <hr>
+        {% endfor %}
+        </div>
+
+    </div>
 
 {% endblock %}
