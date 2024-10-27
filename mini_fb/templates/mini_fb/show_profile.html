@@ -5,6 +5,7 @@
     <div class="overseer-two">
     <h2>{{profile.first_name}} {{profile.last_name}}'s Profile</h2>
     <a class="post" style="text-align:center; align-self:center;" href="{% url 'news_feed' profile.pk %}">News Feed</a>
+    <a class="post" href="{% url 'update_profile' profile.pk %}">Update Profile</a><br>
 
     <div class="group-alone">
         
@@ -46,7 +47,6 @@
     <h2>Status Forms For {{ profile.first_name }} {{profile.last_name}}</h2>
 
     <div class="status">
-    <a class="post" href="{% url 'update_profile' profile.pk %}">Update Profile</a>
     <a class="post" href="{% url 'create_status_form' profile.pk %}">Post Status Form</a>
 
     
