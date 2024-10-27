@@ -39,17 +39,25 @@ class Profile(models.Model):
 
   def add_friend(self, other):
     '''Add friends to this profile.'''
-    #add function to check for duplicated.
 
-    #add function to ensure that self-friending doesn't occur.
     if self != other:
-
-
       all_friends = Friend.objects.all()
       if (all_friends.filter(profile1=self,profile2=other).exists() == False) and (all_friends.filter(profile1=other,profile2=self).exists() == False):
         new_friend = Friend.objects.create(profile1=self,profile2=other)
         new_friend.save()
     return
+
+  def get_friend_suggestions(self):
+    '''Returns a list of possible friends for a profile.'''
+    all_friends = Profile.get_friends(self)
+    all_profiles = Profile.objects.all()
+    suggested_fr = []
+
+    for p in all_profiles:
+      if (p not in all_friends) and (p != self):
+        suggested_fr.append(p)
+
+    return suggested_fr
     
 
 class StatusMessage(models.Model):

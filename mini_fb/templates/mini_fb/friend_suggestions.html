@@ -1,0 +1,16 @@
+{% extends 'mini_fb/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    {% for p in profile.get_friend_suggestions %}
+
+    <a class="post" href="{% url 'add_friend' profile.pk p.pk%}">Add Friend</a><br>
+        <img class="personal" src="{{p.profile_image_url}}" alt="{{p.profile_image_url}}"><br>
+        {{p.first_name}} {{p.last_name}}<br>
+
+    {% endfor %}
+
+
+{% endblock %}

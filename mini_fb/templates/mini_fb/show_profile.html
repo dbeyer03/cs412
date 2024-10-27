@@ -32,6 +32,8 @@
         Where are your friends now, senpai?
 
     {% endif %}
+
+    <a href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
     
 
     <h2>Status Forms For {{ profile.first_name }} {{profile.last_name}}</h2>

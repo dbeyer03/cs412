@@ -123,7 +123,7 @@ class DeleteStatusMessageView(DeleteView):
 class UpdateStatusMessageView(UpdateView):
   form_class = UpdateStatusMessageForm
   template_name = "mini_fb/update_status_form.html"
-  model = StatusMessage 
+  model = StatusMessage
   context_object_name = 'status'
 
   def form_valid(self, form):
@@ -145,7 +145,28 @@ class UpdateStatusMessageView(UpdateView):
     # reverse to show the article page
     return reverse('show_profile', kwargs={'pk':profile.pk})
 
-class CreateFriendView(View):
-  template_name = "mini_fb/add_friend.html"
 
-  #def dispatch(self, request, *args, **kwargs):
+class CreateFriendView(View):
+  #template_name = "mini_fb/add_friend.html"
+
+  def dispatch(self, request, *args, **kwargs):
+
+    # read URL parameters
+    my_pk = self.kwargs.get('pk')
+    other_pk = self.kwargs.get('other_pk')
+
+    # use object manager to find requisite Profile objects
+    profile1 = Profile.objects.filter(pk=my_pk).first()
+    profile2 = Profile.objects.filter(pk=other_pk).first()
+
+    # call Profile's add_friend method
+    Profile.add_friend(profile1, profile2)
+
+    #redirect user back to profile page
+    return redirect('show_profile', pk=my_pk)
+
+class ShowFriendSuggestionsView(DetailView):
+  '''Show the suggested friends for a profile.'''
+  model = Profile 
+  template_name = 'mini_fb/friend_suggestions.html'
+  context_object_name = 'profile'
