@@ -8,6 +8,7 @@ from . forms import *
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse ## NEW
 from .forms import UpdateProfileForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def home_page_view(request):
@@ -42,7 +43,7 @@ class CreateProfileView(CreateView):
   form_class = CreateProfileForm
   template_name = 'mini_fb/create_profile_form.html'
 
-class CreateStatusMessageView(CreateView):
+class CreateStatusMessageView(LoginRequiredMixin, CreateView):
   '''A view to create a status message on a profile page.'''
   form_class = CreateStatusMessageForm 
   template_name = 'mini_fb/create_status_form.html'
@@ -61,6 +62,12 @@ class CreateStatusMessageView(CreateView):
 
     print(f'CreateStatusMessageView.form_valid(): form={form.cleaned_data}')
     print(f'CreateStatusMessageView.form_valid(): self.kwargs={self.kwargs}')
+
+    # find the user who is logged in
+    user = self.request.user
+
+    # attach that user as a FK to the new Article instance
+    form.instance.user = user
 
     # find the Profile indicated by the PK from the url pattern.
     profile = Profile.objects.get(pk=self.kwargs['pk'])
@@ -90,7 +97,7 @@ class CreateStatusMessageView(CreateView):
     return reverse('show_profile',kwargs={'pk':profile.pk})
   
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
   form_class = UpdateProfileForm 
   template_name = "mini_fb/update_profile_form.html"
   model = Profile
@@ -100,9 +107,16 @@ class UpdateProfileView(UpdateView):
     Handle the form submission to update a Profile object.
     '''
     print(f'UpdateProfileView: form.cleaned_data={form.cleaned_data}')
+
+    # find the user who is logged in
+    user = self.request.user
+
+    # attach that user as a FK to the new Article instance
+    form.instance.user = user
+
     return super().form_valid(form)
 
-class DeleteStatusMessageView(DeleteView):
+class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
   template_name = "mini_fb/delete_status_form.html"
   model = StatusMessage 
   context_object_name = 'status'
@@ -115,12 +129,17 @@ class DeleteStatusMessageView(DeleteView):
     
     # find the proile to which this Status Message is related by FK
     profile = status.profile
+
+    # find user for which the profile belongs to.
+    user = profile.user
     
+    #if (self.request.user is not None) and (self.request.user != user):
+
     # reverse to show the article page
     return reverse('show_profile', kwargs={'pk':profile.pk})
 
 
-class UpdateStatusMessageView(UpdateView):
+class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
   form_class = UpdateStatusMessageForm
   template_name = "mini_fb/update_status_form.html"
   model = StatusMessage
@@ -131,6 +150,13 @@ class UpdateStatusMessageView(UpdateView):
     Handle the form submission to update a StatusMessage object.
     '''
     print(f'UpdateStatusMessageView: form.cleaned_data={form.cleaned_data}')
+
+    # find the user who is logged in
+    user = self.request.user
+
+    # attach that user as a FK to the new Article instance
+    form.instance.user = user
+
     return super().form_valid(form)
 
   def get_success_url(self):
@@ -146,7 +172,7 @@ class UpdateStatusMessageView(UpdateView):
     return reverse('show_profile', kwargs={'pk':profile.pk})
 
 
-class CreateFriendView(View):
+class CreateFriendView(LoginRequiredMixin, View):
   #template_name = "mini_fb/add_friend.html"
 
   def dispatch(self, request, *args, **kwargs):
@@ -159,19 +185,19 @@ class CreateFriendView(View):
     profile1 = Profile.objects.filter(pk=my_pk).first()
     profile2 = Profile.objects.filter(pk=other_pk).first()
 
-    # call Profile's add_friend method
+
     Profile.add_friend(profile1, profile2)
 
     #redirect user back to profile page
     return redirect('show_profile', pk=my_pk)
 
-class ShowFriendSuggestionsView(DetailView):
+class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
   '''Show the suggested friends for a profile.'''
   model = Profile 
   template_name = 'mini_fb/friend_suggestions.html'
   context_object_name = 'profile'
 
-class ShowNewsFeedView(DetailView):
+class ShowNewsFeedView(LoginRequiredMixin, DetailView):
   model = Profile 
   template_name = 'mini_fb/news_feed.html'
   context_object_name = 'profile'

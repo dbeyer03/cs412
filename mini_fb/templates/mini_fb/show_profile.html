@@ -4,8 +4,12 @@
 {% block content %}
     <div class="overseer-two">
     <h2>{{profile.first_name}} {{profile.last_name}}'s Profile</h2>
-    <a class="post" style="text-align:center; align-self:center;" href="{% url 'news_feed' profile.pk %}">News Feed</a>
-    <a class="post" href="{% url 'update_profile' profile.pk %}">Update Profile</a><br>
+    {% if user.is_authenticated %}
+        {% if user == profile.user %}
+            <a class="post" style="text-align:center; align-self:center;" href="{% url 'news_feed' profile.pk %}">News Feed</a>
+            <a class="post" href="{% url 'update_profile' profile.pk %}">Update Profile</a><br>
+        {% endif %}
+    {% endif %}
 
     <div class="group-alone">
         
@@ -41,13 +45,22 @@
 
     {% endif %}
     <p style="padding-top:20px;"></p>
-    <a class="post" style="margin-bottom:20px;" href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
+
+    {% if user.is_authenticated %}
+        {% if user == profile.user %}
+            <a class="post" style="margin-bottom:20px;" href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
+        {% endif %}
+    {% endif %}
     
 
     <h2>Status Forms For {{ profile.first_name }} {{profile.last_name}}</h2>
 
     <div class="status">
-    <a class="post" href="{% url 'create_status_form' profile.pk %}">Post Status Form</a>
+    {% if user.is_authenticated %}
+        {% if user == profile.user %}
+            <a class="post" href="{% url 'create_status_form' profile.pk %}">Post Status Form</a>
+        {% endif %}
+    {% endif %}
 
     
     {% if profile.get_status_messages %}
@@ -69,8 +82,12 @@
                     <img class="status" src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
                 {% endfor %}
                 <br>
-                <a class="status" href="{% url 'update_status_form' m.pk %}">Update</a>
-                <a class="status" href="{% url 'delete_status_form' m.pk %}">Delete</a>
+                {% if user.is_authenticated %}
+                    {% if user == profile.user %}
+                        <a class="status" href="{% url 'update_status_form' m.pk %}">Update</a>
+                        <a class="status" href="{% url 'delete_status_form' m.pk %}">Delete</a>
+                    {% endif %}
+                {% endif %}
             </div>
 
 

@@ -10,6 +10,12 @@
     
 
     <h1>Shrunken Facebook</h1>
+    {% if request.user.is_authenticated %}
+                Logged in user: {{ request.user }}.
+                {% else %}
+                Not logged in.
+                {% endif %}<br>
+
 
     <div class="links">
         <a class="button" href="{% url 'show_all_profiles' %}">Profiles</a>
