@@ -1,0 +1,13 @@
+{% extends 'mini_fb/base.html' %}
+{% load static %}
+
+{% block content %}
+
+You have been logged out.<br>
+<form method="POST">
+    {% csrf_token %}
+</form>
+
+<a class="button" href="{% url 'login' %}">Login</a>
+
+{% endblock %}
