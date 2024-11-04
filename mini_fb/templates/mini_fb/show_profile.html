@@ -57,7 +57,7 @@
     <div class="status">
         {% if user.is_authenticated %}
             {% if user == profile.user %}
-                <a class="post" href="{% url 'create_status_form' profile.pk %}">Post Status Form</a>
+                <a class="post" href="{% url 'create_status_form' %}">Post Status Form</a>
             {% endif %}
         {% endif %}
     

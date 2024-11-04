@@ -7,7 +7,7 @@
         {% for p in profile.get_friend_suggestions %}
         
             <div class="shrunk_profile"  style="padding-bottom:30px;">
-                <a class="add_friend" href="{% url 'add_friend' profile.pk p.pk%}">Add Friend</a>
+                <a class="add_friend" href="{% url 'add_friend' p.pk %}">Add Friend</a>
                 <a href="{% url 'show_profile' p.pk %}">
                     <img class="profile_friends" src="{{p.profile_image_url}}" alt="{{p.profile_image_url}}">
                 </a>

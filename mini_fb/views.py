@@ -52,7 +52,7 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
 
     # identify profile by its kwargs.
     context = super().get_context_data(**kwargs)
-    profile = Profile.objects.get(pk=self.kwargs['pk'])
+    profile = Profile.objects.get(user=self.request.user)
     # store kwargs info in dictionary.
     context['profile'] = profile 
 
@@ -70,7 +70,7 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
     form.instance.user = user
 
     # find the Profile indicated by the PK from the url pattern.
-    profile = Profile.objects.get(pk=self.kwargs['pk'])
+    profile = Profile.objects.get(user=self.request.user)
 
     # Attach Profile to instance of comment to set FK
     form.instance.profile = profile 
@@ -93,7 +93,7 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
 
   def get_success_url(self) -> str: 
     #redirects the URL on success.
-    profile = Profile.objects.get(pk=self.kwargs['pk'])
+    profile = Profile.objects.get(user=self.request.user)
     return reverse('show_profile',kwargs={'pk':profile.pk})
   
 
@@ -183,18 +183,22 @@ class CreateFriendView(LoginRequiredMixin, View):
   def dispatch(self, request, *args, **kwargs):
 
     # read URL parameters
-    my_pk = self.kwargs.get('pk')
     other_pk = self.kwargs.get('other_pk')
 
     # use object manager to find requisite Profile objects
-    profile1 = Profile.objects.filter(pk=my_pk).first()
-    profile2 = Profile.objects.filter(pk=other_pk).first()
+    profile1 = Profile.objects.get(user=self.request.user)
+    profile2 = Profile.objects.filter(pk=self.kwargs.get('other_pk')).first()
 
 
     Profile.add_friend(profile1, profile2)
 
     #redirect user back to profile page
-    return redirect('show_profile', pk=my_pk)
+    return redirect(reverse('show_profile', kwargs={'pk':profile1.pk}))
+  
+  #return Profile corresponding to current user.
+  def get_object(self):
+    profile = Profile.objects.get(user=self.request.user)
+    return profile
 
 
 
