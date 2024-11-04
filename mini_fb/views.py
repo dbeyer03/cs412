@@ -115,6 +115,11 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
     form.instance.user = user
 
     return super().form_valid(form)
+  
+  #return Profile corresponding to current user.
+  def get_object(self):
+    profile = Profile.objects.get(user=self.request.user)
+    return profile
 
 class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
   template_name = "mini_fb/delete_status_form.html"
@@ -191,13 +196,25 @@ class CreateFriendView(LoginRequiredMixin, View):
     #redirect user back to profile page
     return redirect('show_profile', pk=my_pk)
 
+
+
 class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
   '''Show the suggested friends for a profile.'''
   model = Profile 
   template_name = 'mini_fb/friend_suggestions.html'
   context_object_name = 'profile'
 
+  #return Profile corresponding to current user.
+  def get_object(self):
+    profile = Profile.objects.get(user=self.request.user)
+    return profile
+
 class ShowNewsFeedView(LoginRequiredMixin, DetailView):
   model = Profile 
   template_name = 'mini_fb/news_feed.html'
   context_object_name = 'profile'
+
+  #return Profile corresponding to current user.
+  def get_object(self):
+    profile = Profile.objects.get(user=self.request.user)
+    return profile
