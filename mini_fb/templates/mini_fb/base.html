@@ -13,6 +13,7 @@
 
     {% if request.user.is_authenticated %}
         Logged in user: {{ request.user }}.<br>
+        <a class="button" href = "{% url 'show_profile' request.user.profile.pk %}">Your Profile</a>
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
             <input type="submit" value="Logout">
