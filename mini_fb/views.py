@@ -72,6 +72,13 @@ class CreateProfileView(CreateView):
   form_class = CreateProfileForm
   template_name = 'mini_fb/create_profile_form.html'
 
+  '''
+  def get_login_url(self) -> str:
+      return the URL required for login
+      return reverse('login') 
+  '''
+
+  
   def get_context_data(self, **kwargs: any) -> dict[str,any]:
     # identify profile by its kwargs.
     context = super().get_context_data(**kwargs)
@@ -94,7 +101,8 @@ class CreateProfileView(CreateView):
     # Attach user
     form.instance.user = user
 
-    return super().form_valid(form)          
+    return super().form_valid(form)    
+       
 
 
 
@@ -277,3 +285,4 @@ class ShowNewsFeedView(LoginRequiredMixin, DetailView):
   def get_object(self):
     profile = Profile.objects.get(user=self.request.user)
     return profile
+
