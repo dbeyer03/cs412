@@ -10,6 +10,7 @@ from django.urls import reverse ## NEW
 from .forms import UpdateProfileForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def home_page_view(request):
@@ -62,7 +63,6 @@ class CreateRegisterUserView(CreateView):
       login(self.request, user)
       print(f"CreateRegisterUserView.dispatch, user {user} is logged in.")
 
-      return redirect(reverse('create_profile'))
     
     # let the superclass CreateView handle the HTTP GET request:
     return super().dispatch(*args, **kwargs)
@@ -71,13 +71,6 @@ class CreateProfileView(CreateView):
   '''A view to create a new profile page.'''
   form_class = CreateProfileForm
   template_name = 'mini_fb/create_profile_form.html'
-
-  '''
-  def get_login_url(self) -> str:
-      return the URL required for login
-      return reverse('login') 
-  '''
-
   
   def get_context_data(self, **kwargs: any) -> dict[str,any]:
     # identify profile by its kwargs.
@@ -93,15 +86,29 @@ class CreateProfileView(CreateView):
 
     # we handle the HTTP POST request
     # reconstruct the UserCreationForm from the HTTP POST
-    form = UserCreationForm(self.request.POST)
+    if self.request.POST: 
+      form_u = UserCreationForm(self.request.POST)
+      if form_u.is_valid():
+        # save the new User object
+        user = form_u.save() # creates a new instance of User object in the database
 
-    # save the new User object
-    user = form.save() # creates a new instance of User object in the database
+        # Attach user
+        form.instance.user = user
 
-    # Attach user
-    form.instance.user = user
+        username, password = form_u.cleaned_data.get('username'), form_u.cleaned_data.get('password1')
 
-    return super().form_valid(form)    
+        v_user = authenticate(username=username,password=password)
+
+        
+        login(self.request, v_user)
+        #print(f"CreateProfileView.dispatch, user {user} is logged in.")
+
+        # redirect the user to some page view...
+        #return redirect(reverse('login'))
+ 
+
+    return super().form_valid(form)  
+   
        
 
 

@@ -82,6 +82,7 @@ class Profile(models.Model):
 
     return ordered_fs
 
+'''
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -90,6 +91,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save() 
+'''
 
 class StatusMessage(models.Model):
   text = models.TextField(blank=False)

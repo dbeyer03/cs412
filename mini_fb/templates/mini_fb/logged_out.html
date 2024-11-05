@@ -2,12 +2,14 @@
 {% load static %}
 
 {% block content %}
-
+<h></h><br>
+<h></h>
 You have been logged out.<br>
 <form method="POST">
     {% csrf_token %}
 </form>
-
+<h></h><br>
+<h></h>
 <a class="button" href="{% url 'login' %}">Login</a>
 
 {% endblock %}
