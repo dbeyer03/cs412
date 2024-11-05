@@ -13,11 +13,7 @@
 
     {% if request.user.is_authenticated %}
         Logged in user: {{ request.user }}.<br>
-        <a class="button" href = "{% url 'show_profile' request.user.profile.pk %}">Your Profile</a>
-        <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <input type="submit" value="Logout">
-        </form>
+
     {% else %}
         Not logged in.
     {% endif %}<br>
@@ -27,11 +23,20 @@
         <a class="button" href="{% url 'show_all_profiles' %}">All Profiles</a>
         <a class="button" href="{% url 'info' %}">About Us</a>
         {% if request.user.is_authenticated %}
-        
+        <a class="button" href = "{% url 'show_profile' request.user.profile.pk %}">Your Profile</a>
+
         {% else %}
         <a class="button" href="{% url 'login' %}">Login</a>
         {% endif %}
-        <a class="button" href="{% url 'create_profile_form' %}">Create Profile</a>
+
+        {% if request.user.is_authenticated %}
+        <form class="button" method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <input class="dubmit" type="submit" value="Logout">
+        </form>
+        {% else %}
+            <a class="button" href="{% url 'create_profile_form' %}">Create Profile</a>
+        {% endif %}
     </div>
 
     {% block content %}

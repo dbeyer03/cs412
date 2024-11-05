@@ -9,6 +9,7 @@ from django.views.generic import View, ListView, DetailView, CreateView, UpdateV
 from django.urls import reverse ## NEW
 from .forms import UpdateProfileForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def home_page_view(request):
@@ -37,11 +38,65 @@ class ShowProfilePageView(DetailView):
   template_name = 'mini_fb/show_profile.html'
   context_object_name = 'profile'
 
+class CreateRegisterUserView(CreateView):
+  form_class = UserCreationForm
+  template_name = 'mini_fb/register.html'
+
+  def dispatch(self, *args, **kwargs):
+
+    if self.request.POST:
+      print(f"self.request.POST={self.request.POST}")
+      # reconstruct the UserCreationForm from the HTTP POST
+      form = UserCreationForm(self.request.POST)
+
+      if not form.is_valid():
+        print(f'form.errors={form.errors}')
+        # let's the CreateView superclass handle this problem!
+        return super().dispatch(*args, **kwargs)
+
+        # save the new User object
+      user = form.save() # creates a new instance of User object in the database
+      print(f"CreateRegisterUserView.dispatch: created user {user}")
+
+      # log in the User
+      login(self.request, user)
+      print(f"CreateRegisterUserView.dispatch, user {user} is logged in.")
+
+      return redirect(reverse('create_profile'))
+    
+    # let the superclass CreateView handle the HTTP GET request:
+    return super().dispatch(*args, **kwargs)
 
 class CreateProfileView(CreateView):
   '''A view to create a new profile page.'''
   form_class = CreateProfileForm
   template_name = 'mini_fb/create_profile_form.html'
+
+  def get_context_data(self, **kwargs: any) -> dict[str,any]:
+    # identify profile by its kwargs.
+    context = super().get_context_data(**kwargs)
+    register_form = UserCreationForm()
+    context['register_form'] = register_form
+    return context
+  
+  def form_valid(self,form):
+
+    print(f'CreateProfileView.form_valid(): form={form.cleaned_data}')
+    print(f'CreateProfileView.form_valid(): self.kwargs={self.kwargs}')
+
+    # we handle the HTTP POST request
+    # reconstruct the UserCreationForm from the HTTP POST
+    form = UserCreationForm(self.request.POST)
+
+    # save the new User object
+    user = form.save() # creates a new instance of User object in the database
+
+    # Attach user
+    form.instance.user = user
+
+    return super().form_valid(form)          
+
+
 
 class CreateStatusMessageView(LoginRequiredMixin, CreateView):
   '''A view to create a status message on a profile page.'''
@@ -112,7 +167,7 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
     user = self.request.user
 
     # attach that user as a FK to the new Article instance
-    form.instance.user = user
+    form.instance.profile = user
 
     return super().form_valid(form)
   

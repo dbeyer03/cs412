@@ -4,11 +4,26 @@
 {% block content %}
     <div class="overseer-three">
         <h2>Create Profile</h2>
-    <form method="POST">
+    <form method="POST"  enctype="multipart/form-data">
         {% csrf_token %}
 
         <table>
             <tbody>
+                <tr>
+                    <th>Username:</th>
+                    <th>{{register_form.username}}</th>
+                </tr>
+
+                <tr>
+                    <th>Password:</th>
+                    <th>{{register_form.password1}}</th>
+                </tr>
+
+                <tr>
+                    <th>Confirm Password:</th>
+                    <th>{{register_form.password2}}</th>
+                </tr>
+
                 <tr>
                     <th >First Name: </th>
                     <th>{{form.first_name}}</th>

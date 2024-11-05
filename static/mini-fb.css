@@ -331,6 +331,31 @@ input[type=submit]:hover {
     
 }
 
+input[type=submit].dubmit {
+    text-decoration: none;
+    font-style:normal;
+    font-family:arial;
+    background-color:rgb(242, 162, 175);
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    border-radius: 20px;
+    border-width: 1px;
+    border-style:ridge;
+    font-size:22px;
+    box-shadow: -3px 3px 5px 0px rgb(0,0,0,0.7);
+    margin-left:30px;
+    margin-right:30px;
+    transition:0.3s;
+}
+
+input[type=submit].dubmit:hover {
+    font-size:23px;
+    background-color:rgb(255, 255, 131);
+    
+}
+
 /* Used for the buttons in the status message submission form.*/
 div.ending {
     align-items:center;
@@ -348,6 +373,13 @@ form {
     padding-left:10px;
 
 }
+
+/* used to make forms look like buttons.*/
+form.button {
+
+}
+
+
 
 /* Used to stylize the status images.*/
 img.status {
