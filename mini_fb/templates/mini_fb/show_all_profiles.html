@@ -3,7 +3,13 @@
 
 {% block content %}
     <div class="overseer">
-        <h2><u>Your Best Friends</u></h2>
+        {% if request.user.is_authenticated %}
+            <h2><u>Your Best Friends</u></h2>
+
+        {% else %}
+            <h2><u>Your Worst Enemies</u></h2>
+        {% endif %}<br>
+        
     <div class="group">
     {% for p in profiles %}
             
