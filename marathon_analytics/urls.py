@@ -9,4 +9,5 @@ urlpatterns = [
     # map the url to the view 
     path('', views.ResultsListView.as_view(), name="home"),
     path('results', views.ResultsListView.as_view(), name="home"),
+    path(r'results/<int:pk>', views.ResultsDetailView.as_view(), name="result_detail"),
 ]

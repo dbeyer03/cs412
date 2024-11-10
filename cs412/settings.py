@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'quotes', ## quotes app for assign 3!
     'mini_fb',
     'blog',
-    'marathon_analytics',
+    #'marathon_analytics',
+    'voter_analytics',
 ]
 
 MIDDLEWARE = [

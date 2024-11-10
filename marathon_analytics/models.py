@@ -1,7 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
 class Result(models.Model):
     '''
     Store/represent the data from one runner at the Chicago Marathon 2023.
@@ -33,37 +32,74 @@ class Result(models.Model):
         '''Return a string representation of this model instance.'''
         return f'{self.first_name} {self.last_name} ({self.city}, {self.state}), {self.time_finish}'
     
-def load_data():
-    #delete all previous records:
-    Result.objects.all().delete()
-    '''Function to load data records from CSV file into Django model instances.'''
-    filename = '/Users/django-three/marathon_analytics/csv_files/2023_chicago_results.csv'
-    f = open(filename)
-    headers = f.readline()
 
-    #go through the file one line at a time
+    def get_runners_passed(self):
+        '''Return the number of runners who started before this Result 
+        and finished after.'''
+        start_first = Result.objects.filter(start_time_of_day__lt=self.start_time_of_day)
+        passed = start_first.filter(finish_time_of_day__gt=self.finish_time_of_day)
+        return len(passed)
+    
+
+    def get_runners_passed_by(self):
+        '''Return the number of runners who started after this Result 
+        and finished befor it.'''
+        start_after = Result.objects.filter(start_time_of_day__gt=self.start_time_of_day)
+        passed_by = start_after.filter(finish_time_of_day__lt=self.finish_time_of_day)
+        return len(passed_by)
+    
+
+
+def load_data():
+    '''Load the data records from a CSV file, create Django model instances.'''
+
+    # delete all records:
+    Result.objects.all().delete()
+    
+    # open the file for reading one line at a time
+    filename = '/Users/DBeye/django-three/marathon_analytics/csv_files/2023_chicago_results.csv'
+    f = open(filename) # open the file for reading
+    headers = f.readline() # discard the first line containing headers
+
+    # # read a single line:
+    # line = f.readline().strip()
+    # fields = line.split(',')
+    # print(fields)
+    # for i in range(len(fields)):
+    #     print(f'fields[{i}] = {fields[i]}')
+
+    # go through the entire filem one line at a time:
     for line in f:
-        fields = line.split(',')
-                
-        # create a new instance of Result object with this record from CSV
-        result = Result(bib=fields[0],
-                        first_name=fields[1],
-                        last_name=fields[2],
-                        ctz = fields[3],
-                        city = fields[4],
-                        state = fields[5],
+        
+        try:
+            fields = line.split(',')
+            # "parsing": splitting some data into filelds, assign each to variable
+            # create a new instance of Result object with this record from CSV
+            
+            result = Result(bib=fields[0],
+                            first_name=fields[1],
+                            last_name=fields[2],
+                            ctz = fields[3],
+                            city = fields[4],
+                            state = fields[5],
+                            
+                            gender = fields[6],
+                            division = fields[7],
+                            place_overall = fields[8],
+                            place_gender = fields[9],
+                            place_division = fields[10],
                         
-                        gender = fields[6],
-                        division = fields[7],
-                        place_overall = fields[8],
-                        place_gender = fields[9],
-                        place_division = fields[10],
-                    
-                        start_time_of_day = fields[11],
-                        finish_time_of_day = fields[12],
-                        time_finish = fields[13],
-                        time_half1 = fields[14],
-                        time_half2 = fields[15],
-                    )
-        print(f'Created result: {result}')
-        result.save()
+                            start_time_of_day = fields[11],
+                            finish_time_of_day = fields[12],
+                            time_finish = fields[13],
+                            time_half1 = fields[14],
+                            time_half2 = fields[15],
+                        )
+            print(f'Created result: {result}')
+            result.save() # saving/commiting to the database
+        
+        except:
+            print(f"Exception occurred: {fields}.")
+
+    # after the loop
+    print("Done.")
