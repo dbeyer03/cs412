@@ -1,5 +1,8 @@
 from django.db import models
 import datetime
+import math
+import plotly
+import plotly.graph_objs as go
 
 # Create your models here.
 
@@ -30,11 +33,74 @@ class Voter(models.Model):
     
     voter_score = models.IntegerField()
 
-    "https://maps.google.com/?q={{v.street_number}} {{v.street_name}}, Newton, Massachusetts"
+    '''
+        def get_runners_passed_by(self):
+        Return the number of runners who started after this Result 
+        and finished befor it.
+        start_after = Result.objects.filter(start_time_of_day__gt=self.start_time_of_day)
+        passed_by = start_after.filter(finish_time_of_day__lt=self.finish_time_of_day)
+        return len(passed_by)
+    '''
+
+
+
+
     def create_google_map(self):
       map = "https://maps.google.com/?q=" 
       map +=  str(self.street_number) + " " + self.street_name + ", " + "Newton, Massachusetts, " + self.zip_code
       return map
+    
+    
+    def create_previous_page(self):
+
+      voter_score=str(self.voter_score)
+      party_affiliation=self.party_affiliation
+      min_birthday=str(self.min_birthday.year)
+      max_birthday=str(self.max_birthday.year)
+      v20state=self.v20state
+      v21town=self.v21town
+      v21primary=self.v21primary
+      v22general=self.v22general
+      v23town=self.v23town
+      link = "?page={{ page_obj.previous_page_number }}"
+      
+      link += "&voter_score={{ v.voter_score }}"
+      link += "&party_affiliation={{ v.party_affiliation }}"
+      link += "&min_birthday={{ v.min_birthday }}"
+      link += "&max_birthday={{ v.max_birthday }}"
+      link += "&v20state={{ v.v20state }}"
+      link += "&v21town={{ v.v21town }}"
+      link += "&v21primary={{ v.v21primary }}"
+      link += "&v22general={{ v.v22general }}"
+      link += "&v23town={{ v.v23town }}"
+
+      return link
+
+    def create_next_page(self):
+
+      voter_score=str(self.voter_score)
+      party_affiliation=self.party_affiliation
+      min_birthday=str(self.min_birthday.year)
+      max_birthday=str(self.max_birthday.year)
+      v20state=self.v20state
+      v21town=self.v21town
+      v21primary=self.v21primary
+      v22general=self.v22general
+      v23town=self.v23town
+      link = str("?page={{ page_obj.next_page_number }}")
+      
+      link += str("&voter_score={{ v.voter_score }}")
+      link += str("&party_affiliation={{ v.party_affiliation }}")
+      link += str("&min_birthday={{ v.min_birthday }}")
+      link += str("&max_birthday={{ v.max_birthday }}")
+      link += str("&v20state={{ v.v20state }}")
+      link += str("&v21town={{ v.v21town }}")
+      link += str("&v21primary={{ v.v21primary }}")
+      link += str("&v22general={{ v.v22general }}")
+      link += str("&v23town={{ v.v23town }}")
+
+      return link
+      
     
     def __str__(self):
         '''Return a string representation of this model instance.'''

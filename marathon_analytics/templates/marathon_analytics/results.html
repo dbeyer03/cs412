@@ -1,9 +1,13 @@
 <!-- templates/marathon_analytics/results.html -->
 {% extends 'marathon_analytics/base.html' %}
-<h1>Showing all Results</h1>
 {% block content %}
-{% include 'marathon_analytics/search.html' %}
 <div class="container">
+    <div class="row">
+        <!-- effectively importing the HTML from another file -->
+        {% include 'marathon_analytics/search.html' %}
+    </div>
+
+    <h1>Results</h1>
     <div class="row">
         <table>
             <tr>
@@ -21,7 +25,11 @@
             {% for r in results %}
             <tr>
                 
-                <td>{{r.place_overall}}</td>
+                <td>
+                    <a href="{% url 'result_detail' r.pk %}">
+                    {{r.place_overall}}
+                    </a>
+                </td>
                 <td>{{r.first_name}} {{r.last_name}}</a>
                 </td>
                 <td>{{r.ctz}}</td>
@@ -34,27 +42,32 @@
              
             </tr>
             {% endfor %}
+    
         </table>
-    </div>
-    <div class="row">
-        {% if is_paginated %}
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-                <li>
-                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
-             
-                </li>
+        </div>
+
+        <!-- navigation for different pages -->
+        <div class="row">
+            {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li>
+                        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                 
+                    </li>
+                {% endif %}
+                    <li class="">
+                        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                    </li>
+                {% if page_obj.has_next %}
+                    <li>
+                        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                    </li>
+                {% endif %}
+                </ul>
             {% endif %}
-                <li class="">
-                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
-                </li>
-            {% if page_obj.has_next %}
-                <li>
-                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
-                </li>
-            {% endif %}
-            </ul>
-        {% endif %}
+        </div>
+
     </div>
-</div>    
+    
 {% endblock %}

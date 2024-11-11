@@ -57,7 +57,7 @@ def load_data():
     Result.objects.all().delete()
     
     # open the file for reading one line at a time
-    filename = '/Users/DBeye/django-three/marathon_analytics/csv_files/2023_chicago_results.csv'
+    filename = '/Users/azs/Desktop/2023_chicago_results.csv'
     f = open(filename) # open the file for reading
     headers = f.readline() # discard the first line containing headers
 

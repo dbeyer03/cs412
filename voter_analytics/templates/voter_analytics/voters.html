@@ -204,10 +204,34 @@
         <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">Next</a>
-        {% endif %}
+            
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <!--<a href="{{v.create_next_page}}">{{v.create_next_page}}</a>-->
 
+        {% endif %}
+        <!--<a href="{{v.create_next_page}}">Next</a>-->
+<!--
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+             
+                </li>
+            {% endif %}
+                <li class="">
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+            {% endif %}
+            </ul>
+        {% endif %}
+ -->
     {% endif %}
+   
 
 
 {% endblock %}

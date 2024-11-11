@@ -1,0 +1,115 @@
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<form action="{% url 'graphs' %}">
+    <table>
+        <tr>
+            <th>Voter Score</th>
+            <td>
+                <select id="voter_score" name="voter_score">
+                    <option value='None'></option>
+                    <option value='0'>0</option>
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+
+                </select>
+            </td>
+        </tr>
+
+    </table>
+
+    <table>
+        <tr>
+            <th>Party Affiliation</th>
+            <td>
+                <select id="party_affiliation" name="party_affiliation">
+                    <option value='None'></option>
+                    <option value='D'>Democrat</option>
+                    <option value='R'>Republican</option>
+                    <option value='CC'>Constitution PArty</option>
+                    <option value='L'>Libertarian Party</option>
+                    <option value='T'>Tea Party</option>
+                    <option value='O'>Other</option>
+                    <option value='G'>Green Party</option>
+                    <option value='J'>Independent Party</option>
+                    <option value='Q'>Reform Party</option>
+                    <option value='FF'>Freedom Party</option>
+                </select>
+            </td>
+        </tr>
+    
+        <tr>
+            <td></td>
+
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>Minimum Year of Birthday</th>
+            <td>
+                <select id="birth_date" name="min_birthday">
+                    <option value='None'></option>
+                    {% for b in birth_years %}
+                        <option value={{b}}>{{ b }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+    
+    </table>
+
+    <table>
+        <tr>
+            <th>Maximum Year of Birthday</th>
+            <td>
+                <select id="birth_date" name="max_birthday">
+                    <option value='None'></option>
+                    {% for b in birth_years %}
+                        <option value={{b}}>{{ b }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+
+    </table>
+
+    <table>
+        <th>Did they vote in these elections:</th>
+        <tr>
+            <td>
+                <input type="checkbox" id="v20state" name="v20state" value="v20state">
+                <label for="v20state"> The v20 State election.</label><br>
+
+                <input type="checkbox" id="v21town" name="v21town" value="v21town">
+                <label for="v21town"> The v21 Town election.</label><br>
+
+                <input type="checkbox" id="v21primary" name="v21primary" value="v21primary">
+                <label for="v21primary"> The v21 Primary election.</label><br>
+
+                <input type="checkbox" id="v22general" name="v22general" value="v22general">
+                <label for="v22general"> The v22 General election.</label><br>
+
+                <input type="checkbox" id="v23town" name="v23town" value="v23town">
+                <label for="v23town"> The v23 Town election.</label><br>
+            </td>
+        </tr>
+
+    </table>
+
+    
+
+    <input type="submit">
+
+</form>
+
+    {{birthdays|safe}}
+
+    {{voter_distribution|safe}}
+
+    {{participation_graph|safe}}
+
+{% endblock %}
