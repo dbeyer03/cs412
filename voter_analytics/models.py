@@ -1,6 +1,8 @@
 from django.db import models
+import datetime
 
 # Create your models here.
+
 class Voter(models.Model):
     '''
     Store/represent voter data from the recent election.
@@ -12,12 +14,13 @@ class Voter(models.Model):
     
     street_number = models.IntegerField()
     street_name = models.TextField()
+    apartment_number = models.TextField()
     
-    zip_code = models.IntegerField()
+    zip_code = models.TextField()
     birth_date = models.DateField()
     register_date = models.DateField()
     
-    party_affiliation = models.CharField(max_length=1)
+    party_affiliation = models.CharField(max_length=2)
     
     v20state = models.TextField()
     v21town = models.TextField()
@@ -27,22 +30,12 @@ class Voter(models.Model):
     
     voter_score = models.IntegerField()
 
-    '''
-    # gender/division
-    gender = models.CharField(max_length=6)
-    division = models.CharField(max_length=6)
-    # result place
-    place_overall = models.IntegerField()
-    place_gender = models.IntegerField()
-    place_division = models.IntegerField()
-    # timing-related
-    start_time_of_day = models.TimeField()
-    finish_time_of_day = models.TimeField()
-    time_finish = models.TimeField()
-    time_half1 = models.TimeField()
-    time_half2 = models.TimeField()
-    '''
-
+    "https://maps.google.com/?q={{v.street_number}} {{v.street_name}}, Newton, Massachusetts"
+    def create_google_map(self):
+      map = "https://maps.google.com/?q=" 
+      map +=  str(self.street_number) + " " + self.street_name + ", " + "Newton, Massachusetts, " + self.zip_code
+      return map
+    
     def __str__(self):
         '''Return a string representation of this model instance.'''
         if self.party_affiliation == 'D ':
@@ -83,7 +76,7 @@ def load_data():
               first_name = fields[2],
               street_number = fields[3],
               street_name = fields[4],
-
+              apartment_number = fields[5],
               zip_code = fields[6],
               birth_date = fields[7],
               register_date = fields[8],
@@ -95,7 +88,7 @@ def load_data():
               v23town = fields[15],
               voter_score = fields[16],
                         )
-            print(f'Created result: {result}')
+            #print(f'Created result: {result}')
             result.save() # saving/commiting to the database
         
         except:

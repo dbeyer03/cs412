@@ -1,0 +1,64 @@
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+    Find on Google Map: 
+    {% if voter.create_google_map %}
+
+        <a href="{{voter.create_google_map}}">He lives here</a>
+
+    {% endif %}
+
+    <br>
+    {{voter.last_name}}
+
+    {{voter.first_name}}
+
+    {{voter.street_number}}
+
+    {{voter.street_name}}
+
+    {{voter.zip_code}}
+
+    {{voter.birth_date}}
+
+    {{voter.register_date}}
+
+    {{voter.party_affiliation}}
+
+
+    {% if voter.v20state == "TRUE" %}
+        I voted in the 2020 State Election.
+    {% else %}
+        I did NOT vote in the 2020 State Election.
+    {% endif %}
+
+    {% if voter.v21town == "TRUE"  %}
+        I voted in the 2021 Town Election.
+    {% else %}
+        I did NOT vote in the 2021 Town Election.
+    {% endif %}
+
+    {% if voter.v21primary == "TRUE"  %}
+        I voted in the 2021 Primary.
+    {% else %}
+        I did NOT vote in the 2021 Primary.
+    {% endif %}
+
+    {% if voter.v22general == "TRUE"  %}
+        I voted in the 2022 General Election.
+    {% else %}
+        I did NOT vote in the 2022 General Election.
+    {% endif %}
+
+    {% if voter.v23town == "TRUE"  %}
+        I voted in the 2023 Town Election.
+
+    {% else %}
+        I did NOT vote in the 2023 Town Election.
+
+    {% endif %}
+
+    Voter Score:{{voter.voter_score}}
+
+{% endblock %}
