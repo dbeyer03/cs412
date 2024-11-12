@@ -24,6 +24,7 @@ class Voter(models.Model):
     register_date = models.DateField()
     
     party_affiliation = models.CharField(max_length=2)
+    precient_number = models.CharField(max_length=5)
     
     v20state = models.TextField()
     v21town = models.TextField()
@@ -47,7 +48,7 @@ class Voter(models.Model):
 
     def create_google_map(self):
       map = "https://maps.google.com/?q=" 
-      map +=  str(self.street_number) + " " + self.street_name + ", " + "Newton, Massachusetts, " + self.zip_code
+      map +=  str(self.street_number) + "+" + self.street_name + "+" + str(self.apartment_number) + ", " + "Newton, Massachusetts, " + self.zip_code
       return map
     
     
@@ -147,6 +148,7 @@ def load_data():
               birth_date = fields[7],
               register_date = fields[8],
               party_affiliation = fields[9],
+              precient_number = fields[10],
               v20state = fields[11],
               v21town  = fields[12],
               v21primary = fields[13],

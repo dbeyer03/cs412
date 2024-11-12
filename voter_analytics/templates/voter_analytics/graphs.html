@@ -2,7 +2,7 @@
 
 {% block content %}
 <form action="{% url 'graphs' %}">
-    <table>
+    <table class="filters">
         <tr>
             <th>Voter Score</th>
             <td>
@@ -21,7 +21,7 @@
 
     </table>
 
-    <table>
+    <table class="filters">
         <tr>
             <th>Party Affiliation</th>
             <td>
@@ -47,7 +47,7 @@
         </tr>
     </table>
 
-    <table>
+    <table class="filters">
         <tr>
             <th>Minimum Year of Birthday</th>
             <td>
@@ -62,7 +62,7 @@
     
     </table>
 
-    <table>
+    <table class="filters">
         <tr>
             <th>Maximum Year of Birthday</th>
             <td>
@@ -77,7 +77,7 @@
 
     </table>
 
-    <table>
+    <table class="filters">
         <th>Did they vote in these elections:</th>
         <tr>
             <td>
@@ -97,19 +97,29 @@
                 <label for="v23town"> The v23 Town election.</label><br>
             </td>
         </tr>
+        <th><input type="submit"></th>
 
     </table>
 
     
 
-    <input type="submit">
+    
 
 </form>
 
+    <h2 style="font-size:30px;"><u>Voter distribution by Year of Birth (n={{num_voters}})</u></h2>
+    <div class="chart">
     {{birthdays|safe}}
+    </div>
 
+    <div class="chart">
+    <h2 style="font-size:30px;"><u>Voter distribution by Party Affiliation (n={{num_voters}})</u></h2>
     {{voter_distribution|safe}}
+    </div>
 
+    <div class="chart">
+    <h2 style="font-size:30px;"><u>Voter distribution by Participation in Each Election (n={{num_voters}})</u></h2>
     {{participation_graph|safe}}
+    </div>
 
 {% endblock %}

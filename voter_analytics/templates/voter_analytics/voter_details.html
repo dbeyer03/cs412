@@ -2,63 +2,119 @@
 
 {% block content %}
 
-    Find on Google Map: 
-    {% if voter.create_google_map %}
+<div class="overseer-two">
 
-        <a href="{{voter.create_google_map}}">He lives here</a>
+    <h2>{{voter.first_name}} {{voter.last_name}}</h2>
+
+    <table class="filters">
+        <tr>
+            <th style="font-size:25px;">Address: <i style="color:gray">{{voter.street_number}} {{voter.street_name}} {{voter.apartment_number}}, {{voter.zip_code}}</i></th>
+        </tr>
+
+        <tr>
+            <th style="font-size:25px;">Birthday: <i style="color:gray">{{voter.birth_date}}</i></th>
+        </tr>
+
+        <tr>
+            <th  style="font-size:25px;">
+                Registration Date: <i style="color:gray">{{voter.register_date}}</i>
+            </th>
+        </tr>
+
+        </tr>
+            <th  style="font-size:25px;">Party Affiliation: <i style="color:gray">{{voter.party_affiliation}}</i></th>
+        </tr>
+
+    </tr>
+    <th  style="font-size:25px;">Precient Number: <i style="color:gray">{{voter.precient_number}}</i></th>
+</tr>
+
+    </table>
+
+    <h3>Which elections did I vote in?</h3>
+
+    <table class="filters">
+        {% if voter.v20state == "TRUE" %}
+        <tr>
+            <th>I voted in the 2020 State Election.</th>
+        </tr>
+        
+    {% else %}
+    <tr>
+        <th>I did NOT vote in the 2020 State Election.</th>
+    </tr>
+        
+    {% endif %}
+
+    {% if voter.v21town == "TRUE"  %}
+    <tr>
+        <th>I voted in the 2021 Town Election.</th>
+    </tr>
+        
+    {% else %}
+    <tr>
+        <th>I did NOT vote in the 2021 Town Election.</th>
+    </tr>
+        
+    {% endif %}
+
+    {% if voter.v21primary == "TRUE"  %}
+    <tr>
+        <th>I voted in the 2021 Primary.</th>
+    </tr>
+        
+    {% else %}
+    <tr>
+        <th>I did NOT vote in the 2021 Primary.</th>
+    </tr>
+        
+    {% endif %}
+
+    {% if voter.v22general == "TRUE"  %}
+    <tr>
+        <th>I voted in the 2022 General Election.</th>
+    </tr>
+        
+    {% else %}
+    <tr>
+        <th>I did NOT vote in the 2022 General Election.</th>
+    </tr>
+        
+    {% endif %}
+
+    {% if voter.v23town == "TRUE"  %}
+    <tr>
+        <th>I voted in the 2023 Town Election.</th>
+    </tr>
+        
+
+    {% else %}
+    <tr>
+        <th>I did NOT vote in the 2023 Town Election.</th>
+    </tr>
+        
+    {% endif %}
+    </table>
+
+    <h3 style="font-size:20px; font-family:cursive; color:rgb(212, 77, 99);">I have a voter score of {{voter.voter_score}}.</h3>
+     
+    {% if voter.create_google_map %}
+    <h3><a href="{{voter.create_google_map}}">
+        Click here to find me on Google Maps.<br>
+        <img style="width:100px;height:100px; margin-top:7px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Google_Earth_icon.svg/800px-Google_Earth_icon.svg.png">
+        </a>
+    </h3>
+    <img 
+
 
     {% endif %}
 
     <br>
-    {{voter.last_name}}
-
-    {{voter.first_name}}
-
-    {{voter.street_number}}
-
-    {{voter.street_name}}
-
-    {{voter.zip_code}}
-
-    {{voter.birth_date}}
-
-    {{voter.register_date}}
-
-    {{voter.party_affiliation}}
 
 
-    {% if voter.v20state == "TRUE" %}
-        I voted in the 2020 State Election.
-    {% else %}
-        I did NOT vote in the 2020 State Election.
-    {% endif %}
 
-    {% if voter.v21town == "TRUE"  %}
-        I voted in the 2021 Town Election.
-    {% else %}
-        I did NOT vote in the 2021 Town Election.
-    {% endif %}
-
-    {% if voter.v21primary == "TRUE"  %}
-        I voted in the 2021 Primary.
-    {% else %}
-        I did NOT vote in the 2021 Primary.
-    {% endif %}
-
-    {% if voter.v22general == "TRUE"  %}
-        I voted in the 2022 General Election.
-    {% else %}
-        I did NOT vote in the 2022 General Election.
-    {% endif %}
-
-    {% if voter.v23town == "TRUE"  %}
-        I voted in the 2023 Town Election.
-
-    {% else %}
-        I did NOT vote in the 2023 Town Election.
-
-    {% endif %}
-
-    Voter Score:{{voter.voter_score}}
+    
 
 {% endblock %}
+
+</div>

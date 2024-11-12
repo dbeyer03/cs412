@@ -106,10 +106,12 @@ class GraphListView(ListView):
     '''
     # start with superclass context
     context = super().get_context_data(**kwargs)
+    updated_query = self.get_queryset()
     voter = context['voter']
     context['birth_years'] = range(1917,datetime.datetime.now().year)
-    updated_query = self.get_queryset()
+    
     num_voters = str(len(updated_query))
+    context['num_voters'] = num_voters
 
     # Create a pie chart of the distribution of voters by their party affiliation.
 
@@ -148,7 +150,6 @@ class GraphListView(ListView):
     fig1_title = f"Voter distribution by Party Affiliation (n="+num_voters+")"
     # obtain the graph as an HTML div"
     voter_distribution = plotly.offline.plot({"data": [fig1], 
-                                      "layout_title_text": fig1_title,
                                       }, 
                                       auto_open=False, 
                                       output_type="div")
@@ -161,7 +162,6 @@ class GraphListView(ListView):
     fig2 = go.Bar(x=histogram_x, y=histogram_y)
     fig2_title = f"Voter distribution by Year of Birth (n="+num_voters+")"
     birthdays = plotly.offline.plot({"data": [fig2], 
-                                      "layout_title_text": fig2_title,
                                       }, 
                                       auto_open=False, 
                                       output_type="div")
@@ -184,7 +184,6 @@ class GraphListView(ListView):
     fig3_title = f"Voter distribution by Participation In Each Election (n="+num_voters+")"
 
     participation_graph = plotly.offline.plot({"data": [fig3], 
-                                      "layout_title_text": fig3_title,
                                       }, 
                                       auto_open=False, 
                                       output_type="div")

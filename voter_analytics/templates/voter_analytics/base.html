@@ -2,13 +2,557 @@
 <html>
     <head>
         <title>Voter Analytics</title>
-        <link rel="stylesheet" href="{% static 'mini_fb.css' %}">
+        <!--<link rel="stylesheet" href="{% static 'mini_fb.css' %}">-->
+        <!--css sheet wouldn't migrate, so I'm putting it in the CSS file instead.-->
+        <style>
+            body {
+                background-color: rgb(255, 140, 0);
+                width:100%;
+                margin:0 auto;
+                align-items:center;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 40' width='80' height='40'%3E%3Cpath fill='%23fbe1c4' fill-opacity='0.13' d='M0 40a19.96 19.96 0 0 1 5.9-14.11 20.17 20.17 0 0 1 19.44-5.2A20 20 0 0 1 20.2 40H0zM65.32.75A20.02 20.02 0 0 1 40.8 25.26 20.02 20.02 0 0 1 65.32.76zM.07 0h20.1l-.08.07A20.02 20.02 0 0 1 .75 5.25 20.08 20.08 0 0 1 .07 0zm1.94 40h2.53l4.26-4.24v-9.78A17.96 17.96 0 0 0 2 40zm5.38 0h9.8a17.98 17.98 0 0 0 6.67-16.42L7.4 40zm3.43-15.42v9.17l11.62-11.59c-3.97-.5-8.08.3-11.62 2.42zm32.86-.78A18 18 0 0 0 63.85 3.63L43.68 23.8zm7.2-19.17v9.15L62.43 2.22c-3.96-.5-8.05.3-11.57 2.4zm-3.49 2.72c-4.1 4.1-5.81 9.69-5.13 15.03l6.61-6.6V6.02c-.51.41-1 .85-1.48 1.33zM17.18 0H7.42L3.64 3.78A18 18 0 0 0 17.18 0zM2.08 0c-.01.8.04 1.58.14 2.37L4.59 0H2.07z'%3E%3C/path%3E%3C/svg%3E");
+            }
+
+            h1 {
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-style:normal;
+                font-size:45px;
+                background-color:rgb(88, 1, 1);
+                text-align: center;
+                vertical-align: center;
+                color:white;
+                height:60px;
+                width:100%;
+                position: fixed;
+                margin-top: 0px;
+                
+            }
+
+
+            img.all {
+                width:150px;
+                height:150px;
+                border-radius: 90px;
+                border-style:solid;
+                border-width: 5px;
+                border-color:white;
+                margin-top:10px;
+                transition:0.3s;
+            }
+
+
+
+            img:hover{
+                transform:scale(1.05);
+            }
+
+
+            img.personal {
+                margin:20 auto;
+                border-color:white;
+                border-width:4px;
+                border-style:solid;
+                width:305px;
+                height:305px;
+            }
+
+            /* Used for displaying all profile pages. */
+            div.overseer {
+                background-color:white;
+                width:99%;
+                padding-bottom:15px;
+                margin: 20px auto;
+                border-radius: 10px;
+                box-shadow: -3px 2px 6px 3px rgb(0,0,0,0.7);
+
+                
+            }
+
+            /* Used for showing individdual profile page.*/
+            div.overseer-two {
+                background-color:white;
+                width:99%;
+                max-width:1200px;
+                padding-bottom:15px;
+                margin: 10px auto;
+                border-radius: 10px;
+                box-shadow: -3px 2px 6px 3px rgb(0,0,0,0.7);
+
+                
+            }
+
+            /* Used for creating profile page.*/
+            div.overseer-three {
+                background-color:white;
+                width:99%;
+                max-width:1000px;
+                padding-bottom:15px;
+                margin: 20px auto;
+                border-radius: 10px;
+                box-shadow: -3px 2px 6px 3px rgb(0,0,0,0.7);
+
+                
+            }
+
+            h2 {
+                text-align: center;
+                padding-top:10px;
+                color:rgb(88, 1, 1);
+                font-size:50px;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif,cursive;
+            }
+
+            h3 {
+                text-align: center;
+                padding-top:10px;
+                color:rgb(88, 1, 1);
+                font-size:30px;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif,cursive;
+            }
+
+            /* Used to group items in all_profile page.*/
+            div.group {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+                justify-items:center;
+                
+            }
+
+            /* Used to group items in personal profile page.*/
+            div.group-alone {
+                justify-items:center;
+                background-color: pink;
+                margin: 20 auto;
+                max-width:1000px;
+                width:95%;
+                border-radius:40px;
+                border-style:solid;
+                border-color:white;
+                border-width:8px;
+                padding-top:5px;
+                padding-bottom:5px;
+                margin-top:10px;
+                align-items:center;
+                align-content:center;
+                align-self:center;
+                
+            }
+
+            /* Used for the all_profiles page.*/
+            div.profile {
+                background-color:rgb(242, 162, 175);
+                width:310px;
+                height:360px;
+                border-radius:15px;
+                border-style:ridge;
+                border-width: 1px;
+                border-color:rgb(156, 0, 0);
+                font-family:Arial;
+                text-align: center;
+                margin-top:50px;
+                box-shadow: -13px 8px 12px -4px rgb(0,0,0,0.7);
+                transition:0.3s;
+                
+            }
+
+            div.profile:hover {
+                transform:scale(1.02);
+                background-color:aquamarine;
+            }
+
+
+
+            p {
+                font-size:20px;
+                padding-top:5px;
+                color:rgb(156, 0, 0);
+            }
+
+            p.two {
+                font-size:15px;
+                padding-top:5px;
+                color:rgb(236, 3, 3);
+                
+            }
+
+            p.three {
+                color:rgb(0, 0, 0);
+                font-size:18px;
+                width:90%;
+                max-width:1000px;
+                text-align:center;
+                margin:0 auto;
+                padding-bottom:15px;
+            }
+
+            div.links{
+                align-self: center;
+                text-align: center;
+                margin-top:20px;
+                
+            }
+
+            /* Used for the header buttons.*/
+            a.button {
+                text-decoration: none;
+                font-style:normal;
+                font-family:arial;
+                background-color:rgb(242, 162, 175);
+                padding-left:10px;
+                padding-right:10px;
+                padding-top:5px;
+                padding-bottom:5px;
+                border-radius: 20px;
+                border-width: 1px;
+                border-style:ridge;
+                font-size:22px;
+                box-shadow: -3px 3px 5px 0px rgb(0,0,0,0.7);
+                margin-left:30px;
+                margin-right:30px;
+                transition:0.3s;
+            }
+
+            a.button:hover {
+                font-size:23px;
+                background-color:rgb(255, 255, 131);
+            }
+
+            /* Used for the create status message button.*/
+            a.post {
+                text-decoration: none;
+                font-style:normal;
+                font-family:arial;
+                background-color:aquamarine;
+                color:rgb(4, 128, 6);
+                padding-left:10px;
+                padding-right:10px;
+                padding-top:5px;
+                padding-bottom:5px;
+                border-radius: 20px;
+                border-width: 1px;
+                border-style:ridge;
+                font-size:22px;
+                box-shadow: -3px 3px 5px 0px rgb(0,0,0,0.7);
+                margin-left:50px;
+                margin-right:30px;
+                margin-top:10px;
+                margin-bottom:20px;
+                
+                transition:0.3s;
+            }
+
+            a.post:hover {
+                font-size:23px;
+                background-color:rgb(255, 255, 131);
+            }
+
+            div.footer {
+                text-align:center;
+                color:rgb(122, 122, 117);
+            }
+
+            div.about {
+                font-size:60px;
+            }
+
+            /* Used for the individual profile page.*/
+            div.show_profile {
+                border-radius:25px;
+                flex-wrap:wrap;
+                display:flex;
+                width:90%;
+                min-width:650px;
+                min-height:500px;
+                height:auto;
+                align-self:center;
+                align-items:center;
+                align-content:center;
+                margin:40 auto;
+                background-color: #f3f5e3;
+                background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e9d1b8' fill-opacity='0.21'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            }
+
+            /* Used to stylize the individual profile info.*/
+            div.profile_info { 
+                background-color:white;
+                min-width:300px;
+                width:93%;
+                max-width:850px;
+                height:350px;
+                margin:10 auto;
+                vertical-align:center;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family:Arial;
+                color:rgb(123, 0, 0);
+                font-size:27px;
+            }
+
+            ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                text-align:left;
+                align-self:center;
+                align-items:center;
+                align-content:center;
+            }
+
+            li {
+                padding: 0;
+                margin: 0;
+            }
+
+            /* Used for the status messages.*/
+            div.messages {
+                font-family:cursive;
+                margin-left:15px;
+                width:97%;
+                align-self:center;
+                align-items:center;
+                align-content:center;
+                margin-top:20px;
+                overflow-wrap: break-word;
+                
+            }
+
+            /* Used for messages that overflow.*/
+            div.posted{
+                color:rgb(156, 155, 155);
+                margin-left:20px;
+                overflow-wrap: break-word;
+            }
+
+            /* Used to align status.*/
+            div.status{
+                align-items:center;
+            }
+
+            /* Used for the form submission buttons.*/
+            input[type=submit] {
+                height:40px;
+                margin:10 auto;
+                margin-left:20px;
+                border-radius:10px;
+                font-family:cursive;
+                background-color: #ddd5e9;
+                color:#67685e;
+                transition:0.3s;
+            }
+
+            input[type=submit]:hover {
+                font-size:23px;
+                background-color:rgb(255, 255, 131);
+                
+            }
+
+            input[type=submit].dubmit {
+                text-decoration: none;
+                font-style:normal;
+                font-family:arial;
+                background-color:rgb(242, 162, 175);
+                padding-left:10px;
+                padding-right:10px;
+                padding-top:5px;
+                padding-bottom:5px;
+                border-radius: 20px;
+                border-width: 1px;
+                border-style:ridge;
+                font-size:22px;
+                box-shadow: -3px 3px 5px 0px rgb(0,0,0,0.7);
+                margin-left:30px;
+                margin-right:30px;
+                transition:0.3s;
+            }
+
+            input[type=submit].dubmit:hover {
+                font-size:23px;
+                background-color:rgb(255, 255, 131);
+                
+            }
+
+            /* Used for the buttons in the status message submission form.*/
+            div.ending {
+                align-items:center;
+                align-content:center;
+                align-self: center;
+                margin: 20 auto;
+                padding-left:10px;
+            }
+
+            /* used to align the submission forms.*/
+            form {
+                align-self:center;
+                align-items:center;
+                margin: 0 auto;
+                padding-left:10px;
+                align-content:center;
+            }
+
+            /* used to make forms look like buttons.*/
+            form.button {
+
+            }
+
+
+
+            /* Used to stylize the status images.*/
+            img.status {
+                height:80px;
+                width:auto;
+                border-color: aquamarine;
+                border-style: solid;
+                border-radius:5px;
+                border-width: 6px;
+                margin-left:1px;
+                margin-right:1px;
+            }
+
+            div.status-img {
+                margin-left:35px;
+            }
+
+            a.status {
+                text-decoration: none;
+                font-style:normal;
+                font-family:cursive;
+                background-color:rgb(242, 162, 175);
+                transition:0.3s;
+            }
+
+            a.status:hover{
+                background-color:rgb(242, 255, 127);
+            }
+
+            /* Used to stylize the update/delete pages.*/
+            th {
+                font-family:cursive;
+            }
+
+            td {
+                margin-left:5px;
+                padding-left:10px;
+            }
+
+            /* Used to group profile friends.*/
+            div.profile_friends {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(min(123px, 100%), 1fr));
+                justify-items:center;
+                
+            }
+
+            img.profile_friends {
+                height:100px;
+                width:100px;
+            }
+
+            div.shrunk_profile {
+                background-color:rgb(162, 242, 223);
+                width:120px;
+                height:10em;
+                border-radius:15px;
+                border-style:ridge;
+                border-width: 1px;
+                border-color:rgb(156, 0, 0);
+                font-family:Arial;
+                text-align: center;
+                padding-top:5px;
+                margin-top:7px;
+                box-shadow: -6px 4px 6px -2px rgb(0,0,0,0.7);
+                transition:0.3s;
+            }
+
+
+
+            p.shrunk {
+                font-size:15px;
+            }
+
+            a.add_friend {
+                font-size:20px;
+                background-color:rgb(239, 142, 148);
+                transition:0.2s;
+            }
+
+            a.add_friend:hover {
+                background-color:rgb(81, 231, 91);
+                font-size:22px;
+                
+            }
+
+            label {
+                font-family:cursive;
+                color:rgb(118, 118, 118);
+            }
+            /*Used to stylize the filter options.*/
+            table.filters {
+                align-self:center;
+                align-content:center;
+                align-items: center;
+                margin:0 auto;
+                margin-top:30px;
+                
+            }
+
+            /*Used to submit filters.*/
+            input[type=submit].filter {
+                height:40px;
+                margin:20 auto;
+                align-self:center;
+                align-content:center;
+                align-items: center;
+                border-radius:10px;
+                font-family:cursive;
+                background-color: #ddd5e9;
+                color:#67685e;
+                transition:0.3s;
+            }
+
+            input[type=submit].filter:hover {
+                font-size:23px;
+                background-color:rgb(255, 255, 131);
+                
+            }
+
+            table.voters{
+                border: 1px solid;
+                border-color:black;
+                font-family:cursive;
+                overflow-x:scroll;
+
+            }
+            th.voters {
+                border: 1px solid;
+                font-family:cursive;
+                padding-left:30px;
+                padding-right:30px;
+                border-color:black;
+            }
+
+            td.voters {
+                border: 1px solid;
+                font-family:cursive;
+                border-color:black;
+            }
+
+            div.chart {
+                width:95%;
+                align-content: center;
+                align-items: center;
+                align-self: center;
+                margin:0 auto;
+            }
+        </style>
     </head>
     <body>
         <h1>Voter Analytics</h1>
+        <p style="margin-bottom:80px"></p>
         <div class="links">
             <a class="button" href="{% url 'voters' %}">Home</a>
-            <a class="button" href="{% url 'graphs' %}">Voter Data</a>
+            <a class="button" href="{% url 'graphs' %}">Voter Graphs</a>
         </div>
         
         

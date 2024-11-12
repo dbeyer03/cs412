@@ -5,7 +5,7 @@
     {{b}}
 {% endfor %}
 <form action="{% url 'voters' %}">
-    <table>
+    <table  class="filters">
         <tr>
             <th>Voter Score</th>
             <td>
@@ -24,7 +24,7 @@
 
     </table>
 
-    <table>
+    <table  class="filters">
         <tr>
             <th>Party Affiliation</th>
             <td>
@@ -50,7 +50,7 @@
         </tr>
     </table>
 
-    <table>
+    <table  class="filters">
         <tr>
             <th>Minimum Year of Birthday</th>
             <td>
@@ -65,7 +65,7 @@
     
     </table>
 
-    <table>
+    <table  class="filters">
         <tr>
             <th>Maximum Year of Birthday</th>
             <td>
@@ -80,7 +80,7 @@
 
     </table>
 
-    <table>
+    <table class="filters">
         <th>Did they vote in these elections:</th>
         <tr>
             <td>
@@ -98,98 +98,122 @@
 
                 <input type="checkbox" id="v23town" name="v23town" value="v23town">
                 <label for="v23town"> The v23 Town election.</label><br>
+
+                
             </td>
+
+            
         </tr>
+        <th><input class="filter" type="submit"></th>
+        
 
     </table>
-
     
-
-    <input type="submit">
 
 </form>
 
-<h1>Voters</h1>
-
-    <table>
-        <tr>
-            <th>Voter Info</th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Street Number</th>
-            <th>Street Name</th>
-            <th>Zip Code</th>
-            <th>Birthday</th>
-            <th>Registeration Date</th>
-            <th>Party Affiliation</th>
-            <th>V20State</th>
-            <th>V21Town</th>
-            <th>V21Primary</th>
-            <th>V22General</th>
-            <th>V23Town</th>
-            <th>Voter Score</th>
+    <table class="voters">
+        <tr class="voters" style="background-color: rgb(175, 4, 4); color:rgb(169, 169, 169);">
+            <th class="voters">Voter Info</th>
+            <th class="voters">Last Name</th>
+            <th class="voters">First Name</th>
+            <th class="voters">Street Address</th>
+            <th class="voters">Zip Code</th>
+            <th class="voters">Birthday</th>
+            <th class="voters">Registeration Date</th>
+            <th class="voters">Party Affiliation</th>
+            <th class="voters">Precient Number</th>
+            <th class="voters">V20State</th>
+            <th class="voters">V21Town</th>
+            <th class="voters">V21Primary</th>
+            <th class="voters">V22General</th>
+            <th class="voters">V23Town</th>
+            <th class="voters">Voter Score</th>
         </tr>
 
         {% for v in voters %}
-        <tr>
-            <td>
-                <a href="{% url 'voter' v.pk %}">Info</a>
+        <tr class="voters">
+            <td class="voters" >
+                <a style="color:rgb(68, 15, 158);" href="{% url 'voter' v.pk %}">Info Link</a>
             </td>
 
-            <td>
+            <td class="voters">
                 {{v.last_name}}
             </td>
 
-            <td>
+            <td class="voters">
                 {{v.first_name}}
-            </td>
+            </td class="voters">
 
-            <td>
-                {{v.street_number}}
-            </td>
-
-            <td>
-                {{v.street_name}}
-            </td>
+            <td class="voters">
+                {{v.street_number}} {{v.street_name}} {{v.apartment_number}}
+            </td class="voters">
 
 
-            <td>
+
+            <td class="voters">
                 {{v.zip_code}}
-            </td>
+            </td class="voters">
 
-            <td>
+            <td class="voters">
                 {{v.birth_date}}
-            </td>
+            </td class="voters">
 
-            <td>
+            <td class="voters">
                 {{v.register_date}}
-            </td>
+            </td class="voters">
 
-            <td>
+            <td class="voters">
                 {{v.party_affiliation}}
             </td>
 
-            <td>
-                {{v.v20state}}
+            <td class="voters">
+                {{v.precient_number}}
             </td>
 
-            <td>
-                {{v.v21town}}
+            <td class="voters">
+                {% if v.v20state == "TRUE" %}
+                    Voted
+                {% else %}
+                    Didn't Vote
+                {% endif %}
             </td>
 
-            <td>
-                {{v.v21primary}}
+            <td class="voters">
+                {% if v.v21town == "TRUE" %}
+                    Voted
+                {% else %}
+                    Didn't Vote
+                {% endif %}
             </td>
 
-            <td>
-                {{v.v22general}}
+            <td class="voters">
+                {% if v.v21primary == "TRUE" %}
+                    Voted
+                {% else %}
+                    Didn't Vote
+                {% endif %}
             </td>
 
-            <td>
-                {{v.v23town}}
+            <td class="voters">
+                {% if v.v22general == "TRUE" %}
+                    Voted
+                {% else %}
+                    Didn't Vote
+                {% endif %}
             </td>
 
-            <td>{{v.voter_score}}</td>
+            <td class="voters">
+                {% if v.v23town == "TRUE" %}
+                    Voted
+                {% else %}
+                    Didn't Vote
+                {% endif %}
+            </td>
+
+            <td class="voters">
+                {{v.voter_score}}
+            </td>
         </tr>
 
         {% endfor %}
@@ -197,39 +221,23 @@
 
     {% if is_paginated %}
 
+    <div style="margin-top:10px; margin-bottom:10px; margin-left:25px;" class="page">
         {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        <a style="font-family:cursive;" href="?page={{ page_obj.previous_page_number }}">Previous</a>
         {% endif %}
 
-        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+        
 
         {% if page_obj.has_next %}
+        
             
-        <a href="?page={{ page_obj.next_page_number }}">Next</a>
-            <!--<a href="{{v.create_next_page}}">{{v.create_next_page}}</a>-->
+                <span style="font-family:cursive;">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                <a style="font-family:cursive;" href="?page={{ page_obj.next_page_number }}">Next</a>
+            
 
         {% endif %}
-        <!--<a href="{{v.create_next_page}}">Next</a>-->
-<!--
-        {% if is_paginated %}
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-                <li>
-                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
-             
-                </li>
-            {% endif %}
-                <li class="">
-                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
-                </li>
-            {% if page_obj.has_next %}
-                <li>
-                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
-                </li>
-            {% endif %}
-            </ul>
-        {% endif %}
- -->
+    </div>
+
     {% endif %}
    
 
