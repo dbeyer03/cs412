@@ -6,7 +6,7 @@ from django.urls import path, include
 
 # create a list of URLs for this app:
 urlpatterns = [
-    # map the url to the view 
+    # map the urls to the views.
     path('', views.VoterListView.as_view(), name="voters"),
     path('voters', views.VoterListView.as_view(), name="voters"),
     path('voter/<int:pk>', views.VoterDetailView.as_view(), name="voter"),
